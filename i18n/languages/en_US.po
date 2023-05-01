@@ -1,0 +1,339 @@
+# Translation of Stable (latest release) in Spanish (Colombia)
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-12-15 13:42-0400\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+"Project-Id-Version: Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: insomniodev <dev@insomniodev.com>\n"
+"Language-Team: \n"
+"Language: en_US\n"
+
+msgid "Insomniodev"
+msgstr "Insomniodev"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Welcome to Insomniodev Theme"
+msgstr "Welcome to Insomniodev Theme"
+
+msgid "Select a option"
+msgstr "Select a option"
+
+msgid "Template not found"
+msgstr "Template not found"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Changes saved successfully"
+msgstr "Changes saved successfully"
+
+msgid "It was not possible to save the changes"
+msgstr "It was not possible to save the changes"
+
+msgid "Select image"
+msgstr "Select image"
+
+msgid "Select a image to upload"
+msgstr "Select a image to upload"
+
+msgid "Use this image"
+msgstr "Use this image"
+
+msgid "Social network"
+msgstr "Redes sociales"
+
+msgid "Social"
+msgstr "Social"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Instagram"
+msgstr "Instagram"
+
+msgid "Twitter"
+msgstr "Twitter"
+
+msgid "Youtube"
+msgstr "Youtube"
+
+msgid "Whatsapp"
+msgstr "Whatsapp"
+
+msgid "Put the url here"
+msgstr "Put the url here"
+
+msgid "Copyright"
+msgstr "Copyright"
+
+msgid "Portfolios"
+msgstr "Portfolios"
+
+msgid "Portfolio"
+msgstr "Portfolio"
+
+msgid "Add new portfolio"
+msgstr "Add new portfolio"
+
+msgid "Edit portfolio"
+msgstr "Edit portfolio"
+
+msgid "Search portfolio"
+msgstr "Search portfolio"
+
+msgid "portfolio"
+msgstr "portfolio"
+
+msgid "Portfolio categories"
+msgstr "Portfolio categories"
+
+msgid "Portfolio category"
+msgstr "Portfolio category"
+
+msgid "Add new portfolio category"
+msgstr "Add new portfolio category"
+
+msgid "Edit portfolio category"
+msgstr "Edit portfolio category"
+
+msgid "Search portfolio category"
+msgstr "Search portfolio category"
+
+msgid "portfolio-category"
+msgstr "portfolio-category"
+
+msgid "Testimonials"
+msgstr "Testimonials"
+
+msgid "Testimony"
+msgstr "Testimony"
+
+msgid "Add new testimony"
+msgstr "Add new testimony"
+
+msgid "Edit testimony"
+msgstr "Edit testimony"
+
+msgid "Search testimony"
+msgstr "Search testimony"
+
+msgid "testimony"
+msgstr "testimony"
+
+msgid "Testimony categories"
+msgstr "Testimony categories"
+
+msgid "Testimony category"
+msgstr "Testimony category"
+
+msgid "Add new testimony category"
+msgstr "Add new testimony category"
+
+msgid "Edit testimony category"
+msgstr "Edit testimony category"
+
+msgid "Search testimony category"
+msgstr "Search testimony category"
+
+msgid "testimony-category"
+msgstr "testimony-category"
+
+msgid "Teams"
+msgstr "Teams"
+
+msgid "Team"
+msgstr "Team"
+
+msgid "Add new member"
+msgstr "Add new member"
+
+msgid "Edit member"
+msgstr "Edit member"
+
+msgid "Search member"
+msgstr "Search member"
+
+msgid "team"
+msgstr "team"
+
+msgid "Team categories"
+msgstr "Team categories"
+
+msgid "Team category"
+msgstr "Team category"
+
+msgid "Add new team category"
+msgstr "Add new team category"
+
+msgid "Edit team category"
+msgstr "Edit team category"
+
+msgid "Search team category"
+msgstr "Search team category"
+
+msgid "team-category"
+msgstr "team-category"
+
+msgid "Galleries"
+msgstr "Galleries"
+
+msgid "Gallery"
+msgstr "Gallery"
+
+msgid "Add new gallery"
+msgstr "Add new gallery"
+
+msgid "Edit gallery"
+msgstr "Edit gallery"
+
+msgid "Search gallery"
+msgstr "Search gallery"
+
+msgid "gallery"
+msgstr "gallery"
+
+msgid "Galleries categories"
+msgstr "Galleries categories"
+
+msgid "Galleries category"
+msgstr "Galleries category"
+
+msgid "Add new galleries category"
+msgstr "Add new galleries category"
+
+msgid "Edit galleries category"
+msgstr "Edit galleries category"
+
+msgid "Search galleries category"
+msgstr "Search galleries category"
+
+msgid "galleries-category"
+msgstr "galleries-category"
+
+msgid "Footer"
+msgstr "Footer"
+
+msgid "Add widgets here to appear in your footer"
+msgstr "Add widgets here to appear in your footer"
+
+msgid "Add widgets here to appear in your sidebar"
+msgstr "Add widgets here to appear in your sidebar"
+
+msgid "Clients"
+msgstr "Clients"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Add new client"
+msgstr "Add new client"
+
+msgid "Edit client"
+msgstr "Edit client"
+
+msgid "Search client"
+msgstr "Search client"
+
+msgid "client"
+msgstr "client"
+
+msgid "Clients categories"
+msgstr "Clients categories"
+
+msgid "Add new clients category"
+msgstr "Add new clients category"
+
+msgid "Edit clients category"
+msgstr "Edit clients category"
+
+msgid "Search clients category"
+msgstr "Search clients category"
+
+msgid "clients-category"
+msgstr "clients-category"
+
+msgid "Upload by"
+msgstr "Upload by"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Values"
+msgstr "Values"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Add new value"
+msgstr "Add new value"
+
+msgid "Edit value"
+msgstr "Edit value"
+
+msgid "Search value"
+msgstr "Search value"
+
+msgid "value"
+msgstr "value"
+
+msgid "Values categories"
+msgstr "Values categories"
+
+msgid "Add new values category"
+msgstr "Add new values category"
+
+msgid "Edit values category"
+msgstr "Edit values category"
+
+msgid "Search values category"
+msgstr "Search values category"
+
+msgid "values-category"
+msgstr "values-category"
+
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+msgid "Active taxonomy"
+msgstr "Active taxonomy"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+msgid "News"
+msgstr "News"
+
+msgid "Oops ... The page was not found"
+msgstr "Oops ... The page was not found"
+
+msgid "404"
+msgstr "404"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Results for: '%s'"
+msgstr "Results for: '%s'"
+
+msgid "No result found"
+msgstr "No result found"
+
+msgid "Read more"
+msgstr "Read more"

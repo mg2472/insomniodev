@@ -1,0 +1,102 @@
+.idt-mobile-menu-container {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	height: 0;
+	background-color: transparent;
+	visibility: hidden;
+	z-index: 0;
+	ul {
+		list-style: none;
+		padding: 0;
+		margin-bottom: 0;
+	}
+	ul.idt-menu-mobile__dropdown > li.menu-item-has-children {
+		@media only screen and (max-width: 991px) {
+			position: relative;
+			&:after {
+				content: '\f107';
+				font-family: "Font Awesome 5 Free";
+				font-weight: 600;
+				text-align: right;
+				position: absolute;
+				width: 100%;
+				top: 0;
+				left: 0;
+				color: #fff;
+				//-webkit-transition: 0.4s ease-in-out;
+				//-moz-transition: 0.4s ease-in-out;
+				//-o-transition: 0.4s ease-in-out;
+				//transition: 0.4s ease-in-out;
+			}
+			ul {
+				width: 100%;
+				position: absolute;
+				opacity: 0;
+				overflow: hidden;
+				transform: translate(0, -30px);
+				z-index: -1;
+			}
+			&.idt-active__dropdown {
+				&:after {
+					content: '\f106';
+					// transform: rotate(180deg);
+				}
+				ul {
+					position: relative;
+					opacity: 1;
+					transform: translate(0, 0);
+					z-index: 9;
+				}
+			}
+		}
+	}
+	.menu {
+		visibility: hidden;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		justify-content: space-between;
+	}
+	&.active {
+		height: 100vh;
+		visibility: visible;
+		background-color: #666;
+		-webkit-transition: 400ms all ease-out;
+		-moz-transition: 400ms all ease-out;
+		-o-transition: 400ms all ease-out;
+		transition: 400ms all ease-out;
+		z-index: 9999;
+		.menu {
+			visibility: visible;
+		}
+	}
+}
+.idt-mobile-menu-button {
+	display: table;
+	margin-left: auto;
+	background-color: transparent;
+	border: none;
+	color: #fff;
+	font-size: 1.5rem;
+	outline: none;
+	:focus {
+		outline: none;
+	}
+	&__open,
+	&__close {
+		display: none;
+		&.active {
+			display: initial;
+		}
+	}
+	svg {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}
+.idt-menu-mobile-layout {
+	padding: 0.5rem 0;
+	position: relative;
+}

@@ -1,0 +1,20 @@
+.idt-menu {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 0;
+	display: flex;
+	align-items: center;
+	&--horizontal {
+		li {
+			display: inline-block;
+			margin-right: 0.4rem;
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+	&--center {
+		align-items: center;
+		justify-content: center;
+	}
+}
