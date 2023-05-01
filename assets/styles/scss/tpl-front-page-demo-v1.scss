@@ -1,0 +1,12 @@
+.idt-tpl-front-page-demo-v1 {
+    color: #fff;
+    background: #000000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .idt-logo {
+        width: auto;
+        max-height: 200px;
+    }
+}

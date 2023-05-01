@@ -1,0 +1,29 @@
+img {
+	max-width: 100%;
+	height: auto;
+}
+button:focus {
+	outline: none !important;
+}
+html {
+	font-size: 16px;
+}
+.idt-header-sticky {
+	position: fixed !important;
+	width: 100%;
+	z-index: 99999;
+	&.idt-sticky-active {
+		-webkit-transition: 400ms all ease-out;
+		-moz-transition: 400ms all ease-out;
+		-o-transition: 400ms all ease-out;
+		transition: 400ms all ease-out;
+	}
+}
+.idt-separator {
+	padding-top: 66px;
+}
+.idt-holder {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}

@@ -1,0 +1,3 @@
+/**
+ * Main theme footer scripts
+ */
