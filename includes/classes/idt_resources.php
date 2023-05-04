@@ -179,7 +179,7 @@ class IdtResources
 
     /**
      * Add the default theme scripts
-     * @version 1.0.0
+     * @version 1.0.1
      * @return void
      */
     public function addDefaultThemeScripts(): void
@@ -187,8 +187,8 @@ class IdtResources
         wp_register_script('idtBootstrapJS' , IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/js/bootstrap.bundle.min.js', [], '1.0.0', true);
         wp_enqueue_script('idtBootstrapJS');
 
-        wp_register_script('idtLiteYoutubeEmbed' , IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.js', '', null, true);
-        wp_enqueue_script('idtLiteYoutubeEmbed');
+        wp_register_style('idtLiteYoutubeEmbed', IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.css', false);
+        wp_enqueue_style('idtLiteYoutubeEmbed');
 
         wp_register_script('idtDefaultHeaderScripts', IDT_THEME_DIR . '/assets/scripts/header-scripts.js', [], null, false);
         wp_enqueue_script('idtDefaultHeaderScripts');
