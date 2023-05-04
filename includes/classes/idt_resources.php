@@ -4,14 +4,14 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
 
 /**
  * Main theme resources handler class
- * @version 1.0.1
-*/
+ * @version 0.0.1
+ */
 class IdtResources
 {
     /**
      * Add the theme resources
      * @param string $template Current template
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function addThemeResources($template = ''): void
     {
@@ -67,7 +67,7 @@ class IdtResources
     /**
      * Add the theme scripts
      * @param array $settings Current template settings
-     * @version 1.0.0
+     * @version 0.0.1
      * @return void
      */
     public function addThemeScripts(array $settings = []): void
@@ -110,7 +110,7 @@ class IdtResources
     /**
      * Add the theme styles
      * @param array $settings Current template settings
-     * @version 1.0.0
+     * @version 0.0.1
      * @return void
      */
     public function addThemeStyles(array $settings = []): void
@@ -156,7 +156,7 @@ class IdtResources
 
     /**
      * Add the default theme styles
-     * @version 1.0.1
+     * @version 1.0.0
      * @return void
      */
     public function addDefaultThemeStyles(): void
@@ -167,7 +167,7 @@ class IdtResources
         wp_register_style('idtGlideTheme', IDT_THEME_DIR . '/assets/libs/glide/css/glide.theme.min.css', false);
         wp_enqueue_style('idtGlideTheme');
 
-        wp_register_style('idtLiteYoutubeEmbed', IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt.embed.css', false);
+        wp_register_style('idtLiteYoutubeEmbed', IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.css', false);
         wp_enqueue_style('idtLiteYoutubeEmbed');
 
         wp_register_style('idtBootstrapStyles', IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/css/bootstrap.min.css', false);
@@ -175,11 +175,18 @@ class IdtResources
 
         wp_register_style('idtThemeStyles', IDT_THEME_DIR . '/assets/styles/css/master.css', ['idtBootstrapStyles'], '1.0.0');
         wp_enqueue_style('idtThemeStyles');
+
+        if (defined('IDT_CHILD_THEME_DIR')) {
+            $childThemeDir = IDT_CHILD_THEME_DIR;
+
+            wp_register_style( 'idtChildThemeStyles', $childThemeDir . '/assets/styles/css/child-master.css', ['idtThemeStyles'], '1.0.0');
+            wp_enqueue_style( 'idtChildThemeStyles' );
+        }
     }
 
     /**
      * Add the default theme scripts
-     * @version 1.0.1
+     * @version 0.0.1
      * @return void
      */
     public function addDefaultThemeScripts(): void
@@ -187,8 +194,8 @@ class IdtResources
         wp_register_script('idtBootstrapJS' , IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/js/bootstrap.bundle.min.js', [], '1.0.0', true);
         wp_enqueue_script('idtBootstrapJS');
 
-        wp_register_style('idtLiteYoutubeEmbed', IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.css', false);
-        wp_enqueue_style('idtLiteYoutubeEmbed');
+        wp_register_script('idtLiteYoutubeEmbed' , IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.js', '', null, true);
+        wp_enqueue_script('idtLiteYoutubeEmbed');
 
         wp_register_script('idtDefaultHeaderScripts', IDT_THEME_DIR . '/assets/scripts/header-scripts.js', [], null, false);
         wp_enqueue_script('idtDefaultHeaderScripts');
@@ -213,7 +220,7 @@ class IdtResources
      * @param $handle
      * @param $src
      * @return string
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function addCustomTagsProperties($tag, $handle, $src, $template): string
     {
@@ -305,7 +312,7 @@ class IdtResources
      * @param string $version The Bootstrap version. Default 5.2
      * @param string $filesExtension The Bootstrap files extension to return. Default css
      * @return array Bootstrap styles files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getBootstrapStyleFiles(string $version = '5.2', string $filesExtension = 'css'): array
     {
@@ -336,7 +343,7 @@ class IdtResources
      * @param string $version The Fontawesome version. Default 6.3
      * @param string $filesExtension The Fontawesome files extension to return. Default css
      * @return array Fontawesome styles files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getFontawesomeStyleFiles(string $version = '6.3', string $filesExtension = 'css'): array
     {
@@ -365,7 +372,7 @@ class IdtResources
     /**
      * Get a list of additional theme styles files
      * @return array Additional styles files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getAdditionalStyleFiles(): array
     {
@@ -381,7 +388,7 @@ class IdtResources
      * Get a list of the Theme styles files
      * @param bool $child Check for files in child theme if existed. Default false
      * @return array Theme styles files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getThemeStyleFiles(bool $child = false): array
     {
@@ -416,7 +423,7 @@ class IdtResources
      * Get a list of the Bootstrap scripts files
      * @param string $version The Bootstrap version. Default 5.2
      * @return array Theme scripts files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getBootstrapScriptsFiles(string $version = '5.2'): array
     {
@@ -447,7 +454,7 @@ class IdtResources
      * Get a list of the Fontawesome scripts files
      * @param string $version The Fontawesome version. Default 6.3
      * @return array Theme scripts files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getFontawesomeScriptsFiles(string $version = '6.3'): array
     {
@@ -478,7 +485,7 @@ class IdtResources
      * Get a list of the Theme scripts files
      * @param bool $child Check for files in child theme if existed. Default false
      * @return array Theme scripts files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getThemeScriptsFiles(bool $child = false): array
     {
@@ -512,7 +519,7 @@ class IdtResources
     /**
      * Get a list of additional scripts files
      * @return array Additional scripts files list
-     * @version 1.0.0
+     * @version 0.0.1
      */
     public function getAdditionalScriptsFiles(): array
     {
