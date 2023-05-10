@@ -23,6 +23,7 @@ function idtGetThemeLogo(string $logoName = ''): array
  * @param $postID int|string The post ID
  * @param $size string Image size, default "full"
  * @return array Image data
+ * @version 1.0.1
  */
 function idtGetPostThumbnail($postID = 0, string $size = 'full'): array
 {
@@ -32,7 +33,7 @@ function idtGetPostThumbnail($postID = 0, string $size = 'full'): array
         $imageID = get_post_thumbnail_id($postID);
 
         if ($imageID > 0) {
-            idtGetImageData($imageID, $size);
+            $image = idtGetImageData($imageID, $size);
         }
     }
 
