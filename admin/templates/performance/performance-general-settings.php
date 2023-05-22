@@ -76,6 +76,17 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
             <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
         </label>
     </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-classic-theme"
+               class="idt-dashboard__label"><?php _e('Disable style: Dashicons', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-dashicons"
+                   name="disableStyleDashicons"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
     <div class="idt-dashboard__submit">
         <button type="submit"
                 class="idt-dashboard__button-1">
