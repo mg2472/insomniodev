@@ -40,6 +40,11 @@ function idtPerformanceGeneralSettings(container) {
                 group: '',
                 lang: ''
             },
+            disableStyleDashicons: {
+                value: '',
+                group: '',
+                lang: ''
+            },
         };
 
         if(form) {
@@ -175,6 +180,12 @@ function setFormValues(form, values) {
         if(inputDisableStyleClassicTheme && values.disableStyleClassicTheme && values.disableStyleClassicTheme.value === 'disabled') {
             inputDisableStyleClassicTheme.checked = true;
         }
+
+        //Disable style: Dashicons
+        const inputDisableStyleDashicons = form.querySelector('input[name="disableStyleDashicons"]');
+        if(inputDisableStyleDashicons && values.disableStyleDashicons && values.disableStyleDashicons.value === 'disabled') {
+            inputDisableStyleDashicons.checked = true;
+        }
     }
 }
 
@@ -272,6 +283,20 @@ function getFormValues(form, values, lang = 'all') {
         //Disable style: Classic Theme Lang and Group
         values.disableStyleClassicTheme.group = 'performance';
         values.disableStyleClassicTheme.lang = 'all';
+
+        //Disable style: Dashicons
+        const inputDisableStyleDashicons = form.querySelector('input[name="disableStyleDashicons"]');
+        if (inputDisableStyleDashicons) {
+            if (inputDisableStyleDashicons.checked) {
+                values.disableStyleDashicons.value = 'disabled';
+            } else {
+                values.disableStyleDashicons.value = 'enabled';
+            }
+        }
+
+        //Disable style: Dashicons Lang and Group
+        values.disableStyleDashicons.group = 'performance';
+        values.disableStyleDashicons.lang = 'all';
     }
 
     return values;

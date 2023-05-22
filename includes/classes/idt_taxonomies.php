@@ -8,23 +8,23 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class IdtTaxonomies
 {
-	/**
-	 * Custom taxonomies arrays
-	 * @var array
-	 */
-	private $taxonomies = [];
+    /**
+     * Custom taxonomies arrays
+     * @var array
+     */
+    private $taxonomies = [];
 
-	/**
-	 * Class construct
-	 */
-	public function __construct()
+    /**
+     * Class construct
+     */
+    public function __construct()
     {}
 
     /**
      * Register theme custom taxonomies and post types
      * @return void
      */
-	public function registerPostsAndTaxs() : void
+    public function registerPostsAndTaxs() : void
     {
         // *** Begin: Portafolio Taxonomy *** //
 //        register_post_type(
@@ -79,6 +79,6 @@ class IdtTaxonomies
 //            ]
 //        );
         // *** End: Taxonomia Portafolio *** //
-	}
+    }
 
 }
