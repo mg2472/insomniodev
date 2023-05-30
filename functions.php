@@ -211,7 +211,7 @@ function idtDisableWidgetsBlockEditor(): bool
 add_filter('upload_mimes', 'idtMimeTypes');
 function idtMimeTypes($mimes): array
 {
-    return idtTFMimeTypes();
+    return idtTFMimeTypes($mimes);
 }
 
 /**
