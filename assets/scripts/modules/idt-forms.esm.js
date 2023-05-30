@@ -1,4 +1,4 @@
-import {idtFetchRequest} from "./idt-fetch-esm.js";
+import {idtFetchRequest} from "./idt-fetch.esm.js";
 
 /**
  * Validate a form

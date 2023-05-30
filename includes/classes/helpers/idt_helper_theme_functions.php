@@ -126,9 +126,11 @@ function idtTFAddCustomTagsProperties($tag, $handle, $src): string
 /**
  * Add custom mime types upload support
  *
+ * @param array $mimes allowed file extension lists
+ *
  * @return array
  */
-function idtTFMimeTypes(): array
+function idtTFMimeTypes($mimes): array
 {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;

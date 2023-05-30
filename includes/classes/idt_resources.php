@@ -11,7 +11,7 @@ class IdtResources
     /**
      * Add the theme resources
      * @param string $template Current template
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function addThemeResources($template = ''): void
     {
@@ -28,20 +28,20 @@ class IdtResources
         } else if (is_home()) {
             $args['templateType'] = 'wordpressTPL';
             $args['templateName'] = 'home.php';
-        } else if (is_single()) {
-            $args['templateType'] = 'wordpressTPL';
-            $args['templateName'] = 'single.php';
         } else if (is_singular() && !is_singular(['post', 'page'])) {
             $post = get_post();
             $args['templateType'] = 'postType';
             $args['templateName'] = $post->post_type;
-        } else if (is_category()) {
-            $args['templateType'] = 'taxonomy';
-            $args['templateName'] = 'category';
+        } else if (is_single()) {
+            $args['templateType'] = 'wordpressTPL';
+            $args['templateName'] = 'single.php';
         } else if (is_tax()) {
             $term = get_queried_object();
             $args['templateType'] = 'taxonomy';
             $args['templateName'] = $term->name;
+        } else if (is_category()) {
+            $args['templateType'] = 'taxonomy';
+            $args['templateName'] = 'category';
         } else if ($template != '') {
             $templateName = explode('/', $template);
             $templateName = end($templateName);
@@ -67,11 +67,14 @@ class IdtResources
     /**
      * Add the theme scripts
      * @param array $settings Current template settings
-     * @version 0.0.1
+     * @version 1.0.0
      * @return void
      */
     public function addThemeScripts(array $settings = []): void
     {
+        wp_register_script('idtThemeHeaderHook', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-header-hook.js', false, '1.0.0', false);
+        wp_enqueue_script('idtThemeHeaderHook');
+
         wp_register_script('idtThemeResources', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-resources.esm.js', false, '1.0.0', true);
         wp_enqueue_script('idtThemeResources');
 
@@ -110,7 +113,7 @@ class IdtResources
     /**
      * Add the theme styles
      * @param array $settings Current template settings
-     * @version 0.0.1
+     * @version 1.0.0
      * @return void
      */
     public function addThemeStyles(array $settings = []): void
@@ -186,11 +189,14 @@ class IdtResources
 
     /**
      * Add the default theme scripts
-     * @version 0.0.1
+     * @version 1.0.0
      * @return void
      */
     public function addDefaultThemeScripts(): void
     {
+        wp_register_script('idtThemeHeaderHook', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-header-hook.js', false, '1.0.0', false);
+        wp_enqueue_script('idtThemeHeaderHook');
+
         wp_register_script('idtBootstrapJS' , IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/js/bootstrap.bundle.min.js', [], '1.0.0', true);
         wp_enqueue_script('idtBootstrapJS');
 
@@ -220,7 +226,7 @@ class IdtResources
      * @param $handle
      * @param $src
      * @return string
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function addCustomTagsProperties($tag, $handle, $src, $template): string
     {
@@ -238,20 +244,20 @@ class IdtResources
             } else if (is_home()) {
                 $args['templateType'] = 'wordpressTPL';
                 $args['templateName'] = 'home.php';
-            } else if (is_single()) {
-                $args['templateType'] = 'wordpressTPL';
-                $args['templateName'] = 'single.php';
             } else if (is_singular() && !is_singular(['post', 'page'])) {
                 $post = get_post();
                 $args['templateType'] = 'postType';
                 $args['templateName'] = $post->post_type;
-            } else if (is_category()) {
-                $args['templateType'] = 'taxonomy';
-                $args['templateName'] = 'category';
+            } else if (is_single()) {
+                $args['templateType'] = 'wordpressTPL';
+                $args['templateName'] = 'single.php';
             } else if (is_tax()) {
                 $term = get_queried_object();
                 $args['templateType'] = 'taxonomy';
                 $args['templateName'] = $term->name;
+            } else if (is_category()) {
+                $args['templateType'] = 'taxonomy';
+                $args['templateName'] = 'category';
             } else if ($template != '') {
                 $templateName = explode('/', $template);
                 $templateName = end($templateName);
@@ -272,7 +278,7 @@ class IdtResources
                         foreach ($headerScripts as $item) {
                             $x++;
                             if ('idtHeaderScript-' . $x === $handle) {
-                                $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
+                                $tag = '<script type="module" id="' . $handle . '" src="' . esc_url($src) . '"></script>';
                             }
                         }
                     }
@@ -284,7 +290,7 @@ class IdtResources
                         foreach ($footerScripts as $item) {
                             $x++;
                             if ('idtFooterScript-' . $x === $handle) {
-                                $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
+                                $tag = '<script type="module" id="' . $handle . '" src="' . esc_url($src) . '"></script>';
                             }
                         }
                     }
@@ -301,7 +307,7 @@ class IdtResources
             || 'idtDefaultChildThemeHeaderScripts' === $handle
             || 'idtDefaultChildThemeFooterScripts' === $handle
         ) {
-            $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
+            $tag = '<script type="module" id="' . $handle . '" src="' . esc_url($src) . '"></script>';
         }
 
         return $tag;
@@ -312,7 +318,7 @@ class IdtResources
      * @param string $version The Bootstrap version. Default 5.2
      * @param string $filesExtension The Bootstrap files extension to return. Default css
      * @return array Bootstrap styles files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getBootstrapStyleFiles(string $version = '5.2', string $filesExtension = 'css'): array
     {
@@ -343,7 +349,7 @@ class IdtResources
      * @param string $version The Fontawesome version. Default 6.3
      * @param string $filesExtension The Fontawesome files extension to return. Default css
      * @return array Fontawesome styles files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getFontawesomeStyleFiles(string $version = '6.3', string $filesExtension = 'css'): array
     {
@@ -372,7 +378,7 @@ class IdtResources
     /**
      * Get a list of additional theme styles files
      * @return array Additional styles files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getAdditionalStyleFiles(): array
     {
@@ -423,7 +429,7 @@ class IdtResources
      * Get a list of the Bootstrap scripts files
      * @param string $version The Bootstrap version. Default 5.2
      * @return array Theme scripts files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getBootstrapScriptsFiles(string $version = '5.2'): array
     {
@@ -454,7 +460,7 @@ class IdtResources
      * Get a list of the Fontawesome scripts files
      * @param string $version The Fontawesome version. Default 6.3
      * @return array Theme scripts files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getFontawesomeScriptsFiles(string $version = '6.3'): array
     {
@@ -485,7 +491,7 @@ class IdtResources
      * Get a list of the Theme scripts files
      * @param bool $child Check for files in child theme if existed. Default false
      * @return array Theme scripts files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getThemeScriptsFiles(bool $child = false): array
     {
@@ -519,7 +525,7 @@ class IdtResources
     /**
      * Get a list of additional scripts files
      * @return array Additional scripts files list
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function getAdditionalScriptsFiles(): array
     {
