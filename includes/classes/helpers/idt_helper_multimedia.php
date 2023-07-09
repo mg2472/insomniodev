@@ -58,15 +58,20 @@ function idtGetImageData($imageID = 0, string $size = 'full'): array
 
     if ($imageID > 0) {
         $imageParams = wp_get_attachment_image_src($imageID, $size);
-        $imageUrl = $imageParams[0];
-        $imageWidth = $imageParams[1];
-        $imageHeight = $imageParams[2];
-        $imageAlt = get_post_meta($imageID, '_wp_attachment_image_alt', true);
-        $image['id'] = $imageID;
-        $image['url'] = $imageUrl;
-        $image['alt'] = $imageAlt;
-        $image['width'] = $imageWidth;
-        $image['height'] = $imageHeight;
+
+        if (!empty($imageParams)) {
+            $imageUrl = $imageParams[0];
+            $imageWidth = $imageParams[1];
+            $imageHeight = $imageParams[2];
+            $imageAlt = get_post_meta($imageID, '_wp_attachment_image_alt', true);
+            $image['id'] = $imageID;
+            $image['url'] = $imageUrl;
+            $image['alt'] = $imageAlt;
+            $image['width'] = $imageWidth;
+            $image['height'] = $imageHeight;
+        } else {
+            $image = [];
+        }
     } else {
         $image = [];
     }
