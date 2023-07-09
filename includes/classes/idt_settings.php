@@ -596,6 +596,7 @@ class IdtSettings
                 'lite-youtube-embed' => IDT_THEME_PATH . '/assets/libs/lite-youtube-embed',
                 'theme' => IDT_THEME_PATH,
                 'childTheme' => file_exists(WP_CONTENT_DIR . '/themes/insomniodev-child') ? IDT_CHILD_THEME_PATH : '',
+                'childThemeCssPath' => file_exists(WP_CONTENT_DIR . '/themes/insomniodev-child') ? IDT_CHILD_THEME_PATH . '/assets/styles/css/' : '',
                 'wpUploads' => $wpUploadsDir['basedir'] . '/insomniodev'
             ],
             'dir' => [
@@ -606,6 +607,7 @@ class IdtSettings
                 'lite-youtube-embed' => IDT_THEME_DIR . '/assets/libs/lite-youtube-embed',
                 'theme' => IDT_THEME_DIR,
                 'childTheme' => file_exists(WP_CONTENT_DIR . '/themes/insomniodev-child') ? IDT_CHILD_THEME_DIR : '',
+                'childThemeCssPath' => file_exists(WP_CONTENT_DIR . '/themes/insomniodev-child') ? IDT_CHILD_THEME_DIR . '/assets/styles/css/' : '',
                 'wpUploads' => $wpUploadsDir['baseurl'] . '/insomniodev'
             ]
         ];
@@ -665,7 +667,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['bootstrap'] . '/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'critical-bootstrap-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -685,7 +688,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['criticalCss'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['criticalCss'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
 
@@ -695,7 +698,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['fontawesome'] . '/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'critical-fontawesome-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -712,7 +716,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['criticalCss'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['criticalCss'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
 
@@ -722,7 +726,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['theme'] . '/assets/styles/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'critical-theme-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -735,7 +740,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['criticalCss'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['criticalCss'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
 
@@ -745,7 +750,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['childTheme'] . '/assets/styles/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'critical-child-theme-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -760,7 +766,7 @@ class IdtSettings
                 $resources['criticalChildTheme'] = $compileResult;
 
                 if ($compileResult['compileResult']) {
-                    $resources['criticalCss'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['criticalCss'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
         }
@@ -816,7 +822,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['bootstrap'] . '/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'styles-bootstrap-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -836,7 +843,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['css'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['css'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
 
@@ -846,7 +853,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['fontawesome'] . '/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'styles-fontawesome-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -863,7 +871,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['css'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['css'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
 
@@ -873,7 +881,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['theme'] . '/assets/styles/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'styles-theme-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -886,7 +895,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['css'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['css'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
 
@@ -896,7 +905,8 @@ class IdtSettings
                 $scssSettings = [
                     'path' => $dirs['path']['childTheme'] . '/assets/styles/scss',
                     'importFileName' => 'compiled',
-                    'outputPath' => $dirs['path']['wpUploads'] . '/css/',
+                    'outputPath' => $dirs['path']['childThemeCssPath'] != '' ? $dirs['path']['childThemeCssPath'] : $dirs['path']['wpUploads'] . '/css/',
+                    'outputDir' => $dirs['dir']['childThemeCssPath'] != '' ? $dirs['dir']['childThemeCssPath'] : $dirs['dir']['wpUploads'] . '/css/',
                     'cssFileName' => 'styles-child-theme-' . str_replace('.php', '', $values['templateName']),
                     'compress' => true,
                     'compileString' => ''
@@ -909,7 +919,7 @@ class IdtSettings
                 $compileResult = $scssCompiler->compileScss($scssSettings);
 
                 if ($compileResult['compileResult']) {
-                    $resources['css'][] = $dirs['dir']['wpUploads'] . '/css/' . $compileResult['cssFileName'];
+                    $resources['css'][] = $scssSettings['outputDir'] . $compileResult['cssFileName'];
                 }
             }
         }
