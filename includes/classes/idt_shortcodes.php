@@ -16,6 +16,7 @@ class IdtShortcodes
     {
         add_shortcode('idt_latest_posts', [$this, 'latestPosts']);
         add_shortcode('idt_wc_mini_cart', [$this, 'idtWcMiniCart']);
+        add_shortcode('idt_video', [$this, 'idtVideo']);
     }
 
     /**
@@ -73,4 +74,43 @@ class IdtShortcodes
         return ob_get_clean();
     }
 
+    /**
+     * This shortcode add video facade
+     * @param array $atts Shortcode params
+     * @version 1.0.0
+     */
+    public function idtVideo(array $atts = [])
+    {
+        $params = shortcode_atts(
+            [
+                'source' => null,
+                'url' => null,
+                'title' => null,
+                'video_id' => null,
+                'loading' => null
+            ],
+            $atts
+        );
+
+        $args = [];
+
+        switch ($params['source']) {
+            case 'youtube':
+                $templatePart = 'youtube';
+                $args['title'] = $params['title'];
+                $args['url'] = $params['url'];
+                $args['videoID'] = $params['video_id'];
+                break;
+            case 'iframe':
+            default:
+                $templatePart = 'iframe';
+                $args['url'] = $params['url'];
+                $args['loading'] = $params['loading'];
+                break;
+        }
+
+        ob_start();
+        get_template_part('template-parts/shortcodes/video/video', $templatePart, $args);
+        return ob_get_clean();
+    }
 }
