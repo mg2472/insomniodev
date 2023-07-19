@@ -143,6 +143,21 @@ function idtRegisterSidebars(): void
 }
 
 /**
+ * Register default theme widgets
+ */
+add_action('widgets_init', 'idtRegisterWidgets');
+function idtRegisterWidgets(): void
+{
+    include_once IDT_THEME_PATH . '/includes/widgets/idt_widget_cpt_categories.php';
+    include_once IDT_THEME_PATH . '/includes/widgets/idt_widget_most_popular_posts.php';
+    include_once IDT_THEME_PATH . '/includes/widgets/idt_widget_social_menu.php';
+
+    register_widget('IdtWidgetCptCategories');
+    register_widget('IdtWidgetMostPopularPosts');
+    register_widget('IdtWidgetSocialMenu');
+}
+
+/**
  * Add frontend theme styles and scripts
  */
 add_action('wp_enqueue_scripts', 'idtAddThemeResources');
@@ -222,7 +237,7 @@ function idtWcRefreshMiniCartCount($fragments)
 {
     ob_start();
     ?>
-        <span class="idt-wc-mini-cart__count cart-items-count count">
+    <span class="idt-wc-mini-cart__count cart-items-count count">
             <?php echo WC()->cart->get_cart_contents_count(); ?>
         </span>
     <?php

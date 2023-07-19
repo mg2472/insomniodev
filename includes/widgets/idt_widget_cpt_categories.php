@@ -21,7 +21,7 @@ class IdtWidgetCptCategories extends WP_Widget
     function __construct() {
 	    parent::__construct(
 		    'idt-widget-cptc',  // Base ID
-		    __('InsomnioDEV Custom post type categories list', 'insomniodev'),   // Name
+		    __('IDT - Custom post type categories list', 'insomniodev'),   // Name
             [] // Args
 	    );
     }
@@ -55,9 +55,9 @@ class IdtWidgetCptCategories extends WP_Widget
         $cssID = (isset($instance['css_id'])
             && $instance['css_id'] != '') ? $instance['css_id'] : '';
         ?>
-        <section class="idt-widget <?php echo $cssClass;?>" id="<?php echo $cssID;?>">
+        <section class="idt-widget <?php echo $cssClass; ?>" id="<?php echo $cssID; ?>">
             <?php if (isset($instance['title']) && $instance['title'] != '' ): ?>
-                <h2 class="idt-widget-title"><?php echo $instance['title']; ?></h2>
+                <h2 class="idt-widget__title"><?php echo $instance['title']; ?></h2>
             <?php endif; ?>
             <ul>
                 <?php foreach ($categories as $category): ?>
