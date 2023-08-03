@@ -41,7 +41,7 @@ class IdtWidgetMostPopularPosts extends WP_Widget
         $postsArgs = [
             'post_type' => 'post',
             'meta_key' => 'post_views',
-            'orderby' => 'meta_value_num',
+            'orderby' => 'meta_post_views',
             'order' => 'DESC',
             'posts_per_page'  => 3,
             'post_status' => 'publish',
