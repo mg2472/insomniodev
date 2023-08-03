@@ -246,3 +246,17 @@ function idtWcRefreshMiniCartCount($fragments)
 
     return $fragments;
 }
+
+/**
+* Update a single post views count
+*/
+add_action('wp', 'idtUpdatePostViews');
+function idtUpdatePostViews()
+{
+    if (is_single()) {
+        $postID = get_the_ID();
+        $viewsCount = get_post_meta($postID, 'post_views', true);
+        $newCount = (isset($viewsCount) && (int)$viewsCount > 0) ? ((int)$viewsCount + 1) : 1;
+        update_post_meta($postID, 'post_views', $newCount);
+    }
+}
