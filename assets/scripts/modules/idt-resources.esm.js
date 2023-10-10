@@ -6,14 +6,24 @@
  * @return void
  */
 function idtImportResource(link, tag, args = {}) {
-    if(link && link !== '' && tag && tag !== '') {
+    if (link && link !== '' && tag && tag !== '') {
         const head = document.querySelector('head');
         let resource;
+        let tagArgs = Object.entries(args);
+        let customTagArgs = [];
 
-        if(head) {
+        if (tagArgs.length) {
+            for (let [key, value] of tagArgs) {
+                customTagArgs.push(`${key}="${value}"`);
+            }
+        }
+
+        if (head) {
             switch(tag) {
                 case 'link':
-                    resource = `<link href="${link}" rel="stylesheet">`;
+                    let customAttrs = customTagArgs.length ? customTagArgs.join(' ') : 'rel="stylesheet"';
+
+                    resource = `<link href="${link}" ${customAttrs}>`;
                     break;
                 default:
                     break
@@ -24,4 +34,17 @@ function idtImportResource(link, tag, args = {}) {
     }
 }
 
-export {idtImportResource};
+/**
+ * Import a list of tags when the script is loaded
+ * @param items array The tags to import
+ * @return void
+ */
+function idtImportResources(items) {
+    if (items && items.length) {
+        for (let item of items) {
+            idtImportResource(item.link ?? '', item.tag ?? '', item.args ?? {});
+        }
+    }
+}
+
+export {idtImportResource, idtImportResources};
