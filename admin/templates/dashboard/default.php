@@ -54,8 +54,8 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
                     <?php _e('Settings', 'insomniodev'); ?>
                 </button>
             </li>
-            <li class="b2chat-dashboard__menu-item">
-                <a class="b2chat-dashboard__menu-button" href="<?php echo get_admin_url(); ?>">
+            <li class="idt-dashboard__menu-item">
+                <a class="idt-dashboard__menu-button" href="<?php echo get_admin_url(); ?>">
                     <span class="dashicons dashicons-wordpress"></span>
                     <?php _e('Return to wordpress', 'insomniodev-child'); ?>
                 </a>
