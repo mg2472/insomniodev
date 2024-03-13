@@ -26,15 +26,21 @@ if (isset($configs['total_pages'])) {
     $totalPages = $wp_query->max_num_pages;
 }
 
-$currentPage = get_query_var('paged');
+$currentPage = 0;
+
+if (get_query_var('page')) {
+    $currentPage = get_query_var('page');
+} else {
+    $currentPage = get_query_var('paged');
+}
 
 if (!$currentPage) {
-    $current_page = 1;
+    $currentPage = 1;
 }
 ?>
 <?php if ($totalPages > 1): ?>
-<div class="idt-pagination">
-    <?php
+    <div class="idt-pagination">
+        <?php
         echo paginate_links( [
             'current' => $currentPage,
             'prev_next' => true,
@@ -45,6 +51,6 @@ if (!$currentPage) {
             'end_size' => 3,
             'type' => 'list'
         ] );
-    ?>
-</div>
+        ?>
+    </div>
 <?php endif; ?>
