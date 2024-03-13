@@ -385,7 +385,7 @@ body {
 .idt-dashboard__menu-item {
 	margin-bottom: 0.5rem;
 }
-.idt-dashboard__menu-item button {
+.idt-dashboard__menu-item .idt-dashboard__menu-button {
 	background: transparent;
 	width: 100%;
 	display: flex;
@@ -395,16 +395,17 @@ body {
 	border: none;
 	color: var(--idt-admin-text-color-1);
 	cursor: pointer;
+	box-sizing: border-box;
 	transition: 0.3s;
 }
-.idt-dashboard__menu-item  button:hover,
-.idt-dashboard__menu-item button.active {
+.idt-dashboard__menu-item .idt-dashboard__menu-button:hover,
+.idt-dashboard__menu-item .idt-dashboard__menu-button.active {
 	background-color: var(--idt-admin-bg-color-2);
 	border-top-left-radius: 2rem;
 	border-bottom-left-radius: 2rem;
 	overflow: hidden;
 }
-.idt-dashboard__menu-item button .dashicons {
+.idt-dashboard__menu-item .idt-dashboard__menu-button .dashicons {
 	margin-right: 0.5rem;
 }
 .idt-dashboard__toast {
