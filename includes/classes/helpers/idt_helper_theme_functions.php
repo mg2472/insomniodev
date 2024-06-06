@@ -166,11 +166,11 @@ function idtTFRegisterMenus(): void
 }
 
 /**
- * Remove theme unused scripts and styles
+ * Remove theme unused scripts and styles on the wp_enqueue_scripts action
  *
  * @return void
  */
-function idtTFRemoveThemeScripts(): void
+function idtTFRemoveThemeResourcesScripts(): void
 {
     $settings = idtGetSetting('performance');
 
@@ -178,6 +178,11 @@ function idtTFRemoveThemeScripts(): void
         if (!is_admin()) {
             wp_deregister_script('jquery');
         }
+    }
+
+    if (isset($settings['disableStyleWpGlobalStyles']) && $settings['disableStyleWpGlobalStyles']['value'] == 'disabled') {
+        wp_dequeue_style('global-styles');
+        wp_deregister_style('global-styles');
     }
 
     if (isset($settings['disableStyleWpBlockLibrary']) && $settings['disableStyleWpBlockLibrary']['value'] == 'disabled') {
@@ -196,6 +201,56 @@ function idtTFRemoveThemeScripts(): void
         if (!is_user_logged_in()) {
             wp_dequeue_style('dashicons');
             wp_deregister_style('dashicons');
+        }
+    }
+}
+
+/**
+ * Remove theme unused scripts and styles on the init action
+ *
+ * @return void
+ */
+function idtTFRemoveThemeResourcesInit(): void
+{
+    $settings = idtGetSetting('performance');
+
+    if (!is_user_logged_in()) {
+        if (isset($settings['disableStyleEmojis']) && $settings['disableStyleEmojis']['value'] == 'disabled') {
+            remove_action('wp_head', 'print_emoji_detection_script', 7);
+            remove_action('admin_print_scripts', 'print_emoji_detection_script');
+            remove_action('wp_print_styles', 'print_emoji_styles');
+            remove_action('admin_print_styles', 'print_emoji_styles');
+        }
+
+        if (isset($settings['disableStyleEmojisContentFeed']) && $settings['disableStyleEmojisContentFeed']['value'] == 'disabled') {
+            remove_filter('the_content_feed', 'wp_staticize_emoji');
+        }
+        if (isset($settings['disableStyleEmojisTextRss']) && $settings['disableStyleEmojisTextRss']['value'] == 'disabled') {
+            remove_filter('comment_text_rss', 'wp_staticize_emoji');
+        }
+        if (isset($settings['disableStyleEmojisEmail']) && $settings['disableStyleEmojisEmail']['value'] == 'disabled') {
+            remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+        }
+        if (isset($settings['disableStyleEmojisTinyMcePlugins']) && $settings['disableStyleEmojisTinyMcePlugins']['value'] == 'disabled') {
+            add_filter('tiny_mce_plugins', function ($plugins) {
+                if (is_array($plugins)) {
+                    return array_diff($plugins, ['wpemoji']);
+                } else {
+                    return [];
+                }
+            });
+        }
+        if (isset($settings['disableStyleEmojisDns']) && $settings['disableStyleEmojisDns']['value'] == 'disabled') {
+            add_filter('wp_resource_hints', function ($urls, $relation_type) {
+                if ('dns-prefetch' == $relation_type) {
+                    /** This filter is documented in wp-includes/formatting.php */
+                    $emoji_svg_url = apply_filters('emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/');
+
+                    $urls = array_diff($urls, [$emoji_svg_url]);
+                }
+
+                return $urls;
+            }, 10, 2);
         }
     }
 }

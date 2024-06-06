@@ -25,6 +25,11 @@ function idtPerformanceGeneralSettings(container) {
                 group: '',
                 lang: ''
             },
+            disableStyleWpGlobalStyles: {
+                value: '',
+                group: '',
+                lang: ''
+            },
             disableStyleWpBlockLibrary: {
                 value: '',
                 group: '',
@@ -41,6 +46,36 @@ function idtPerformanceGeneralSettings(container) {
                 lang: ''
             },
             disableStyleDashicons: {
+                value: '',
+                group: '',
+                lang: ''
+            },
+            disableStyleEmojis: {
+                value: '',
+                group: '',
+                lang: ''
+            },
+            disableStyleEmojisContentFeed: {
+                value: '',
+                group: '',
+                lang: ''
+            },
+            disableStyleEmojisTextRss: {
+                value: '',
+                group: '',
+                lang: ''
+            },
+            disableStyleEmojisEmail: {
+                value: '',
+                group: '',
+                lang: ''
+            },
+            disableStyleEmojisTinyMcePlugins: {
+                value: '',
+                group: '',
+                lang: ''
+            },
+            disableStyleEmojisDns: {
                 value: '',
                 group: '',
                 lang: ''
@@ -163,6 +198,12 @@ function setFormValues(form, values) {
             inputDisableJquery.checked = true;
         }
 
+        //Disable style: WP Global styles
+        const inputDisableStyleWpGlobalStyles = form.querySelector('input[name="disableStyleWpGlobalStyles"]');
+        if(inputDisableStyleWpGlobalStyles && values.disableStyleWpGlobalStyles && values.disableStyleWpGlobalStyles.value === 'disabled') {
+            inputDisableStyleWpGlobalStyles.checked = true;
+        }
+
         //Disable style: WP Block Library
         const inputDisableStyleWpBlockLibrary = form.querySelector('input[name="disableStyleWpBlockLibrary"]');
         if(inputDisableStyleWpBlockLibrary && values.disableStyleWpBlockLibrary && values.disableStyleWpBlockLibrary.value === 'disabled') {
@@ -185,6 +226,42 @@ function setFormValues(form, values) {
         const inputDisableStyleDashicons = form.querySelector('input[name="disableStyleDashicons"]');
         if(inputDisableStyleDashicons && values.disableStyleDashicons && values.disableStyleDashicons.value === 'disabled') {
             inputDisableStyleDashicons.checked = true;
+        }
+
+        //Disable style: Emojis
+        const inputDisableStyleEmojis = form.querySelector('input[name="disableStyleEmojis"]');
+        if(inputDisableStyleEmojis && values.disableStyleEmojis && values.disableStyleEmojis.value === 'disabled') {
+            inputDisableStyleEmojis.checked = true;
+        }
+
+        //Disable style: Emojis in content feed
+        const inputDisableStyleEmojisContentFeed = form.querySelector('input[name="disableStyleEmojisContentFeed"]');
+        if(inputDisableStyleEmojisContentFeed && values.disableStyleEmojisContentFeed && values.disableStyleEmojisContentFeed.value === 'disabled') {
+            inputDisableStyleEmojisContentFeed.checked = true;
+        }
+
+        //Disable style: Emojis in text RSS
+        const inputDisableStyleEmojisTextRss = form.querySelector('input[name="disableStyleEmojisTextRss"]');
+        if(inputDisableStyleEmojisTextRss && values.disableStyleEmojisTextRss && values.disableStyleEmojisTextRss.value === 'disabled') {
+            inputDisableStyleEmojisTextRss.checked = true;
+        }
+
+        //Disable style: Emojis in Email
+        const inputDisableStyleEmojisEmail = form.querySelector('input[name="disableStyleEmojisEmail"]');
+        if(inputDisableStyleEmojisEmail && values.disableStyleEmojisEmail && values.disableStyleEmojisEmail.value === 'disabled') {
+            inputDisableStyleEmojisEmail.checked = true;
+        }
+
+        //Disable style: Emojis in Tiny MCE Plugins
+        const inputDisableStyleEmojisTinyMcePlugins = form.querySelector('input[name="disableStyleEmojisTinyMcePlugins"]');
+        if(inputDisableStyleEmojisTinyMcePlugins && values.disableStyleEmojisTinyMcePlugins && values.disableStyleEmojisTinyMcePlugins.value === 'disabled') {
+            inputDisableStyleEmojisTinyMcePlugins.checked = true;
+        }
+
+        //Disable style: Emojis in DNS Cache
+        const inputDisableStyleEmojisDns = form.querySelector('input[name="disableStyleEmojisDns"]');
+        if(inputDisableStyleEmojisDns && values.disableStyleEmojisDns && values.disableStyleEmojisDns.value === 'disabled') {
+            inputDisableStyleEmojisDns.checked = true;
         }
     }
 }
@@ -256,6 +333,20 @@ function getFormValues(form, values, lang = 'all') {
         values.disableStyleWpBlockLibrary.group = 'performance';
         values.disableStyleWpBlockLibrary.lang = 'all';
 
+        //Disable style: WP Global styles
+        const inputDisableStyleWpGlobalStyles = form.querySelector('input[name="disableStyleWpGlobalStyles"]');
+        if (inputDisableStyleWpGlobalStyles) {
+            if (inputDisableStyleWpGlobalStyles.checked) {
+                values.disableStyleWpGlobalStyles.value = 'disabled';
+            } else {
+                values.disableStyleWpGlobalStyles.value = 'enabled';
+            }
+        }
+
+        //Disable style: Global styles Lang and Group
+        values.disableStyleWpGlobalStyles.group = 'performance';
+        values.disableStyleWpGlobalStyles.lang = 'all';
+
         //Disable style: WP Block Library Theme
         const inputDisableStyleWpBlockLibraryTheme = form.querySelector('input[name="disableStyleWpBlockLibraryTheme"]');
         if (inputDisableStyleWpBlockLibraryTheme) {
@@ -297,6 +388,90 @@ function getFormValues(form, values, lang = 'all') {
         //Disable style: Dashicons Lang and Group
         values.disableStyleDashicons.group = 'performance';
         values.disableStyleDashicons.lang = 'all';
+
+        //Disable style: Emojis
+        const inputDisableStyleEmojis = form.querySelector('input[name="disableStyleEmojis"]');
+        if (inputDisableStyleEmojis) {
+            if (inputDisableStyleEmojis.checked) {
+                values.disableStyleEmojis.value = 'disabled';
+            } else {
+                values.disableStyleEmojis.value = 'enabled';
+            }
+        }
+
+        //Disable style: Emojis Lang and Group
+        values.disableStyleEmojis.group = 'performance';
+        values.disableStyleEmojis.lang = 'all';
+
+        //Disable style: Emojis Content Feed
+        const inputDisableStyleEmojisContentFeed = form.querySelector('input[name="disableStyleEmojisContentFeed"]');
+        if (inputDisableStyleEmojisContentFeed) {
+            if (inputDisableStyleEmojisContentFeed.checked) {
+                values.disableStyleEmojisContentFeed.value = 'disabled';
+            } else {
+                values.disableStyleEmojisContentFeed.value = 'enabled';
+            }
+        }
+
+        //Disable style: Emojis Content Feed Lang and Group
+        values.disableStyleEmojisContentFeed.group = 'performance';
+        values.disableStyleEmojisContentFeed.lang = 'all';
+
+        //Disable style: Emojis Text RSS
+        const inputDisableStyleEmojisTextRss = form.querySelector('input[name="disableStyleEmojisTextRss"]');
+        if (inputDisableStyleEmojisTextRss) {
+            if (inputDisableStyleEmojisTextRss.checked) {
+                values.disableStyleEmojisTextRss.value = 'disabled';
+            } else {
+                values.disableStyleEmojisTextRss.value = 'enabled';
+            }
+        }
+
+        //Disable style: Emojis Text RSS Lang and Group
+        values.disableStyleEmojisTextRss.group = 'performance';
+        values.disableStyleEmojisTextRss.lang = 'all';
+
+        //Disable style: Emojis Email
+        const inputDisableStyleEmojisEmail = form.querySelector('input[name="disableStyleEmojisEmail"]');
+        if (inputDisableStyleEmojisEmail) {
+            if (inputDisableStyleEmojisEmail.checked) {
+                values.disableStyleEmojisEmail.value = 'disabled';
+            } else {
+                values.disableStyleEmojisEmail.value = 'enabled';
+            }
+        }
+
+        //Disable style: Emojis Email Lang and Group
+        values.disableStyleEmojisEmail.group = 'performance';
+        values.disableStyleEmojisEmail.lang = 'all';
+
+        //Disable style: Emojis Tiny MCE Plugins
+        const inputDisableStyleEmojisTinyMcePlugins = form.querySelector('input[name="disableStyleEmojisTinyMcePlugins"]');
+        if (inputDisableStyleEmojisTinyMcePlugins) {
+            if (inputDisableStyleEmojisTinyMcePlugins.checked) {
+                values.disableStyleEmojisTinyMcePlugins.value = 'disabled';
+            } else {
+                values.disableStyleEmojisTinyMcePlugins.value = 'enabled';
+            }
+        }
+
+        //Disable style: Emojis Tiny MCE Plugins Lang and Group
+        values.disableStyleEmojisTinyMcePlugins.group = 'performance';
+        values.disableStyleEmojisTinyMcePlugins.lang = 'all';
+
+        //Disable style: Emojis SNS Cache
+        const inputDisableStyleEmojisDns = form.querySelector('input[name="disableStyleEmojisDns"]');
+        if (inputDisableStyleEmojisDns) {
+            if (inputDisableStyleEmojisDns.checked) {
+                values.disableStyleEmojisDns.value = 'disabled';
+            } else {
+                values.disableStyleEmojisDns.value = 'enabled';
+            }
+        }
+
+        //Disable style: Emojis DNS Cache Lang and Group
+        values.disableStyleEmojisDns.group = 'performance';
+        values.disableStyleEmojisDns.lang = 'all';
     }
 
     return values;

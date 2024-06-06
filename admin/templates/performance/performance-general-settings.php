@@ -44,6 +44,17 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
         </label>
     </div>
     <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-wp-global-styles"
+               class="idt-dashboard__label"><?php _e('Disable style: WP Global Styles', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-wp-global-styles"
+                   name="disableStyleWpGlobalStyles"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
         <label for="idt-dashboard__input-disable-style-wp-block-library"
                class="idt-dashboard__label"><?php _e('Disable style: WP Block Library', 'insomniodev'); ?></label>
         <label class="idt-dashboard__input-switch">
@@ -83,6 +94,72 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
             <input type="checkbox"
                    id="idt-dashboard__input-disable-style-dashicons"
                    name="disableStyleDashicons"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-emojis"
+               class="idt-dashboard__label"><?php _e('Disable style: Emojis', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-emojis"
+                   name="disableStyleEmojis"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-emojis-content-feed"
+               class="idt-dashboard__label"><?php _e('Disable style: Emojis in content feed', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-emojis-content-feed"
+                   name="disableStyleEmojisContentFeed"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-emojis-text-rss"
+               class="idt-dashboard__label"><?php _e('Disable style: Emojis in RSS text', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-emojis-text-rss"
+                   name="disableStyleEmojisTextRss"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-emojis-email"
+               class="idt-dashboard__label"><?php _e('Disable style: Emojis in Emails', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-emojis-email"
+                   name="disableStyleEmojisEmail"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-emojis-tiny-mce-plugins"
+               class="idt-dashboard__label"><?php _e('Disable style: Emojis in Tiny MCE Plugins', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-emojis-tiny-mce-plugins"
+                   name="disableStyleEmojisTinyMcePlugins"
+            >
+            <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
+        </label>
+    </div>
+    <div class="idt-dashboard__input-group">
+        <label for="idt-dashboard__input-disable-style-emojis-dns"
+               class="idt-dashboard__label"><?php _e('Disable style: Emojis DNS cache', 'insomniodev'); ?></label>
+        <label class="idt-dashboard__input-switch">
+            <input type="checkbox"
+                   id="idt-dashboard__input-disable-style-emojis-dns"
+                   name="disableStyleEmojisDns"
             >
             <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
         </label>
