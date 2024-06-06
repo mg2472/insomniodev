@@ -17,24 +17,25 @@ $configs = [
     'files' => null
 ];
 
-if (isset($args) && !empty($args)) {
+if (!empty($args)) {
     $configs = array_merge($configs, $args);
 }
 
 $resources = new IdtResources();
+$uniqFieldID = uniqid();
 ?>
-<?php if (isset($configs['files']) && !empty($configs['files'])): ?>
+<?php if (!empty($configs['files'])): ?>
     <div class="idt-dashboard__input-group idt-dashboard__input-group--full-width idt-dashboard__bootstrap-import-styles-option">
         <ul class="idt-dashboard__checkbox-list">
             <?php $count = 0; ?>
             <?php foreach ($configs['files'] as $file): ?>
                 <li>
                     <div class="idt-dashboard__input-group idt-dashboard__input-group--full-width">
-                        <label for="idt-dashboard__input-file-name-<?php echo $count; ?>"
+                        <label for="idt-dashboard__input-file-name-<?php echo $count . '-' . $uniqFieldID; ?>"
                                class="idt-dashboard__label"><?php echo $file; ?></label>
                         <label class="idt-dashboard__input-switch">
                             <input type="checkbox"
-                                   id="idt-dashboard__input-file-name-<?php echo $count; ?>"
+                                   id="idt-dashboard__input-file-name-<?php echo $count . '-' . $uniqFieldID; ?>"
                                    name="files"
                                    data-value="true"
                                    value="<?php echo $file; ?>">

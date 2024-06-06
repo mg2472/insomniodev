@@ -70,8 +70,6 @@ function idtPerformanceTemplate(data, templateID = 0) {
             method = 'updateTemplateSetting';
         }
 
-        console.log('Model ID: ', model.id);
-
         if(form) {
             inputTypeChange(component);
             idtAdminAccordions();
@@ -100,8 +98,6 @@ function idtPerformanceTemplate(data, templateID = 0) {
                 }
 
                 const settings = getFormValues(form, model);
-
-                // console.log('form settings: ', settings);
 
                 idtFetchRequest({
                     action: 'adminRequestsRouter',
@@ -155,8 +151,6 @@ function getSettings(component, form, filters) {
         method: 'getTemplatesSettings',
         data: filters,
     }, idtAdminSettings.ajaxUrl).then(data => {
-        // console.log(' template to edit: ', data);
-
         if (data.errors.length) {
             for (let error of data.errors) {
                 const errorElement = `<div class="idt-dashboard__alert">${error}</div>`;
@@ -191,8 +185,8 @@ function setFormValues(form, values) {
 
         //Template status
         const inputStatus = form.querySelector('select[name="templateStatus"]');
-        if (values.hasOwnProperty('inputStatus') && values.inputStatus !== '') {
-            inputStatus.value = values.inputStatus;
+        if (values.hasOwnProperty('status') && values.status !== '') {
+            inputStatus.value = values.status;
         }
 
         /************
@@ -208,6 +202,9 @@ function setFormValues(form, values) {
             const inputBootstrapCriticalTypeParent = inputBootstrapCriticalType.closest('.idt-dashboard__accordion-body');
 
             if (inputBootstrapCriticalType && inputBootstrapCriticalTypeParent && criticalCssFiles.hasOwnProperty('bootstrap') && criticalCssFiles.bootstrap.length) {
+                inputBootstrapCriticalType.value = 'css';
+                inputBootstrapCriticalType.dispatchEvent(new Event('change'));
+
                 for (let value of criticalCssFiles.bootstrap) {
                     const input = inputBootstrapCriticalTypeParent.querySelector(`.idt-dashboard__input-css-files input[value="${value}"]`);
                     if (input) {
@@ -221,6 +218,9 @@ function setFormValues(form, values) {
             const inputFontawesomeCriticalTypeParent = inputFontawesomeCriticalType.closest('.idt-dashboard__accordion-body');
 
             if (inputFontawesomeCriticalType && inputFontawesomeCriticalTypeParent && criticalCssFiles.hasOwnProperty('fontawesome') && criticalCssFiles.fontawesome.length) {
+                inputFontawesomeCriticalType.value = 'css';
+                inputFontawesomeCriticalType.dispatchEvent(new Event('change'));
+
                 for (let value of criticalCssFiles.fontawesome) {
                     const input = inputFontawesomeCriticalTypeParent.querySelector(`.idt-dashboard__input-css-files input[value="${value}"]`);
                     if (input) {
@@ -255,6 +255,9 @@ function setFormValues(form, values) {
             const inputBootstrapCriticalTypeParent = inputBootstrapCriticalType.closest('.idt-dashboard__accordion-body');
 
             if (inputBootstrapCriticalType && inputBootstrapCriticalTypeParent && criticalCssScssFiles.hasOwnProperty('bootstrap') && criticalCssScssFiles.bootstrap.length) {
+                inputBootstrapCriticalType.value = 'scss';
+                inputBootstrapCriticalType.dispatchEvent(new Event('change'));
+
                 for (let value of criticalCssScssFiles.bootstrap) {
                     const input = inputBootstrapCriticalTypeParent.querySelector(`.idt-dashboard__input-scss-files input[value="${value}"]`);
                     if (input) {
@@ -268,6 +271,9 @@ function setFormValues(form, values) {
             const inputFontawesomeCriticalTypeParent = inputFontawesomeCriticalType.closest('.idt-dashboard__accordion-body');
 
             if (inputFontawesomeCriticalType && inputFontawesomeCriticalTypeParent && criticalCssScssFiles.hasOwnProperty('fontawesome') && criticalCssScssFiles.fontawesome.length) {
+                inputFontawesomeCriticalType.value = 'scss';
+                inputFontawesomeCriticalType.dispatchEvent(new Event('change'));
+
                 for (let value of criticalCssScssFiles.fontawesome) {
                     const input = inputFontawesomeCriticalTypeParent.querySelector(`.idt-dashboard__input-scss-files input[value="${value}"]`);
                     if (input) {
@@ -314,6 +320,9 @@ function setFormValues(form, values) {
             const inputBootstrapTypeParent = inputBootstrapType.closest('.idt-dashboard__accordion-body');
 
             if (inputBootstrapType && inputBootstrapTypeParent && cssFiles.hasOwnProperty('bootstrap') && cssFiles.bootstrap.length) {
+                inputBootstrapType.value = 'css';
+                inputBootstrapType.dispatchEvent(new Event('change'));
+
                 for (let value of cssFiles.bootstrap) {
                     const input = inputBootstrapTypeParent.querySelector(`.idt-dashboard__input-css-files input[value="${value}"]`);
                     if (input) {
@@ -327,6 +336,9 @@ function setFormValues(form, values) {
             const inputFontawesomeTypeParent = inputFontawesomeType.closest('.idt-dashboard__accordion-body');
 
             if (inputFontawesomeType && inputFontawesomeTypeParent && cssFiles.hasOwnProperty('fontawesome') && cssFiles.fontawesome.length) {
+                inputFontawesomeType.value = 'css';
+                inputFontawesomeType.dispatchEvent(new Event('change'));
+
                 for (let value of cssFiles.fontawesome) {
                     const input = inputFontawesomeTypeParent.querySelector(`.idt-dashboard__input-css-files input[value="${value}"]`);
                     if (input) {
@@ -361,6 +373,9 @@ function setFormValues(form, values) {
             const inputBootstrapTypeParent = inputBootstrapType.closest('.idt-dashboard__accordion-body');
 
             if (inputBootstrapType && inputBootstrapTypeParent && cssScssFiles.hasOwnProperty('bootstrap') && cssScssFiles.bootstrap.length) {
+                inputBootstrapType.value = 'scss';
+                inputBootstrapType.dispatchEvent(new Event('change'));
+
                 for (let value of cssScssFiles.bootstrap) {
                     const input = inputBootstrapTypeParent.querySelector(`.idt-dashboard__input-scss-files input[value="${value}"]`);
                     if (input) {
@@ -374,6 +389,9 @@ function setFormValues(form, values) {
             const inputFontawesomeTypeParent = inputFontawesomeType.closest('.idt-dashboard__accordion-body');
 
             if (inputFontawesomeType && inputFontawesomeTypeParent && cssScssFiles.hasOwnProperty('fontawesome') && cssScssFiles.fontawesome.length) {
+                inputFontawesomeType.value = 'scss';
+                inputFontawesomeType.dispatchEvent(new Event('change'));
+
                 for (let value of cssScssFiles.fontawesome) {
                     const input = inputFontawesomeTypeParent.querySelector(`.idt-dashboard__input-scss-files input[value="${value}"]`);
                     if (input) {
