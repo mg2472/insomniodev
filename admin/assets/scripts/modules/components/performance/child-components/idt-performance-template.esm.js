@@ -109,7 +109,6 @@ function idtPerformanceTemplate(data, templateID = 0) {
                     method: method,
                     data: settings,
                 }, idtAdminSettings.ajaxUrl).then(data => {
-                    console.log('response: ', data);
                     let messages = [];
                     const toastArgs = {
                         removeToasts: true

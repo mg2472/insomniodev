@@ -167,12 +167,21 @@ function idtAddThemeResources(): void
 }
 
 /**
- * Remove jQuery and WordPress styles
+ * Remove unused WordPress resources like Scripts and Styles to improve performance
  */
-add_action('wp_enqueue_scripts', 'idtRemoveThemeScripts', 11);
-function idtRemoveThemeScripts(): void
+add_action('init', 'idtRemoveThemeResourcesInit', 4);
+function idtRemoveThemeResourcesInit(): void
 {
-    idtTFRemoveThemeScripts();
+    idtTFRemoveThemeResourcesInit();
+}
+
+/**
+ * Remove unused WordPress resources like Scripts and Styles to improve performance
+ */
+add_action('wp_enqueue_scripts', 'idtRemoveThemeResources', 11);
+function idtRemoveThemeResources(): void
+{
+    idtTFRemoveThemeResourcesScripts();
 }
 
 /**
