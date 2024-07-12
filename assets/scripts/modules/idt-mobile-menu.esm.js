@@ -35,7 +35,11 @@ class idtMobileMenuEsm {
             if(menuItems) {
                 for(let menuItem of menuItems) {
                     menuItem.addEventListener('click', () => {
-                        this.toggleHandler(container, menu, menuMobileTriggers);
+                        const hideMenu = menuItem.dataset.hideMenu || 'true';
+
+                        if (hideMenu !== 'false') {
+                            this.toggleHandler(container, menu, menuMobileTriggers);
+                        }
                     });
                 }
             }
