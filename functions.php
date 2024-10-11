@@ -72,7 +72,7 @@ function idtAddHelpers(): void
     include_once IDT_THEME_PATH . '/includes/classes/helpers/idt_helper_pipes.php';
     include_once IDT_THEME_PATH . '/includes/classes/helpers/idt_helper_settings.php';
     include_once IDT_THEME_PATH . '/includes/classes/helpers/idt_helper_templates.php';
-
+    include_once IDT_THEME_PATH . '/includes/classes/helpers/idt_helper_taxonomies.php';
 }
 
 /**
