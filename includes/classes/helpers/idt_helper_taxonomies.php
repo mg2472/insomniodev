@@ -101,6 +101,7 @@ function idtGetPostList(array $filters = []): array
                 'title' => get_the_title(),
                 'excerpt' => get_the_excerpt(),
                 'content' => get_the_content(),
+                'permalink' => get_the_permalink(),
                 'customFields' => [],
                 'author' => get_the_author(),
                 'date' => get_the_date(),
