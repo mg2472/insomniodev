@@ -36,6 +36,10 @@ function idtGetPostList(array $filters = []): array
         $args['posts_per_page'] = $filters['postPerPage'];
     }
 
+    if (isset($filters['offset']) && $filters['offset'] > 0) {
+        $args['offset'] = $filters['offset'];
+    }
+
     if (isset($filters['search']) && $filters['search'] != '') {
         $args['s'] = trim($filters['search']);
     }
