@@ -239,6 +239,17 @@ function idtMimeTypes($mimes): array
 }
 
 /**
+ * Add them custom query vars
+ */
+add_filter('query_vars', 'idtAddQueryVars');
+function idtAddQueryVars($queryVars)
+{
+    $queryVars[] = 'alphabetic_order';
+
+    return $queryVars;
+}
+
+/**
  * Update Woocommerce mini cart fragments
  */
 add_filter('woocommerce_add_to_cart_fragments', 'idtWcRefreshMiniCartCount');
