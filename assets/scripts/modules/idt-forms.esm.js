@@ -109,9 +109,16 @@ function idtFormValidation(form, callback = null) {
  * Validate a form step
  * @param form object the form to validate.
  * @param callback function an optional callback that will be trigger after the validation.
+ * @param beforeNextStepCallback function Callback called before next step
+ * @param afterNextStepCallback function Callback called after next step
  * @return bool true if the form inputs not have errors, else return false.
  */
-function idtFormStepsValidation(form, callback = null) {
+function idtFormStepsValidation(
+    form,
+    callback = null,
+    beforeNextStepCallback = null,
+    afterNextStepCallback = null
+) {
     if(form) {
         const steps = form.querySelectorAll('.idt-form__step');
         const stepsIndicators = form.querySelectorAll('.idt-form__steps-indicators .idt-form__steps-indicator');
@@ -171,7 +178,7 @@ function idtFormStepsValidation(form, callback = null) {
                                     loader.remove();
                                 }
 
-                                idtFormNextStep(steps, toStep, stepsIndicators);
+                                idtFormNextStep(steps, toStep, stepsIndicators, beforeNextStepCallback, afterNextStepCallback);
                             }
                         }else {
                             stepSubmit.disabled = false;
@@ -192,9 +199,17 @@ function idtFormStepsValidation(form, callback = null) {
  * @param steps HTMLNodes The steps containers
  * @param toStep int The next form step to show
  * @param stepsIndicators HTMLNodes The form steps indicators if existed.
+ * @param beforeNextStepCallback function Callback called before next step
+ * @param afterNextStepCallback function Callback called after next step
  * @return void
  */
-function idtFormNextStep(steps = null, toStep  = null, stepsIndicators = null) {
+function idtFormNextStep(
+    steps = null,
+    toStep  = null,
+    stepsIndicators = null,
+    beforeNextStepCallback = null,
+    afterNextStepCallback = null,
+) {
     if(steps && toStep) {
         const nextStep = steps[0].closest('form').querySelector(`[data-step="${toStep}"]`);
 
@@ -209,6 +224,10 @@ function idtFormNextStep(steps = null, toStep  = null, stepsIndicators = null) {
                 const nextIndicator = parseInt(toStep);
                 let stepIndicatorCount = 0;
 
+                if (beforeNextStepCallback) {
+                    beforeNextStepCallback(steps, toStep, stepsIndicators);
+                }
+
                 for(let indicator of stepsIndicators) {
                     stepIndicatorCount++;
                     if(stepIndicatorCount <= nextIndicator) {
@@ -216,6 +235,10 @@ function idtFormNextStep(steps = null, toStep  = null, stepsIndicators = null) {
                     }else {
                         indicator.classList.remove('active');
                     }
+                }
+
+                if (afterNextStepCallback) {
+                    afterNextStepCallback(steps, toStep, stepsIndicators);
                 }
             }
         }

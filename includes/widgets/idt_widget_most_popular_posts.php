@@ -65,19 +65,45 @@ class IdtWidgetMostPopularPosts extends WP_Widget
             && $instance['css_id'] != '') ? $instance['css_id'] : '';
         ?>
         <section class="idt-widget idt-widget-mpp <?php echo $cssClass; ?>" id="<?php echo $cssID; ?>">
-            <?php if (isset($instance['title']) && $instance['title'] != '' ): ?>
-                <h2 class="idt-widget__title"><?php echo $instance['title']; ?></h2>
+            <?php if (isset($instance['title']) && $instance['title'] != ''): ?>
+                <?php get_template_part('template-parts/utils/tags/title', 'v1', [
+                    'title' => $instance['title'],
+                    'tag' => isset($instance['title_tag']) && $instance['title_tag'] != '' ? $instance['title_tag'] : 'h3',
+                    'cssClass' => 'idt-widget__title'
+                ]); ?>
             <?php endif; ?>
+
             <ul>
                 <?php
                     while ($loop->have_posts()): $loop->the_post();
                         $post = get_post();
                         $categories = get_the_category();
+                        $postImage = idtGetPostThumbnail($post->ID);
+                        $image = [];
+
+                        if (!empty($postImage)) {
+                            $image = [
+                                'url' => $postImage['url'],
+                                'alt' => $postImage['alt'],
+                                'sizes' => [
+                                    'width' => $postImage['width'],
+                                    'height' => $postImage['height']
+                                ],
+                                'skipImageLazy' => false,
+                            ];
+                        }
                 ?>
                 <li class="idt-widget-mpp__container">
                     <article itemscope
                              itemtype="http://schema.org/Article"
                              class="idt-widget-mpp__item">
+
+                        <?php if (isset($instance['posts_show_image']) && $instance['posts_show_image'] && !empty($image)): ?>
+                            <div class="idt-widget-mpp__image-container">
+                                <?php get_template_part('template-parts/utils/images/image', 'v1', $image); ?>
+                            </div>
+                        <?php endif; ?>
+
                         <ul class="idt-widget-mpp__categories">
                             <?php foreach ($categories as $category): ?>
                                 <li itemprop="about">
@@ -86,9 +112,11 @@ class IdtWidgetMostPopularPosts extends WP_Widget
                             <?php endforeach; ?>
                         </ul>
                         <a href="<?php echo get_post_permalink($post->ID); ?>">
-                            <h3 class="idt-widget-mpp__item-title">
-                                <?php echo $post->post_title; ?>
-                            </h3>
+                            <?php get_template_part('template-parts/utils/tags/title', 'v1', [
+                                'title' => $post->post_title,
+                                'tag' => isset($instance['posts_title_tag']) && $instance['posts_title_tag'] != '' ? $instance['posts_title_tag'] : 'h4',
+                                'cssClass' => 'idt-widget-mpp__item-title'
+                            ]); ?>
                             <meta itemprop="headline" content="<?php echo $post->post_title; ?>">
                         </a>
                         <footer class="idt-widget-mpp__footer">
@@ -119,14 +147,51 @@ class IdtWidgetMostPopularPosts extends WP_Widget
     {
         $args = [
             'title' => (isset($instance['title'])) ? $instance['title'] : __('New title', 'insomniodev'),
+            'title_tag' => (isset($instance['title_tag'])) ? $instance['title_tag'] : 'h2',
             'css_class' => (isset($instance['css_class'])) ? $instance['css_class'] : '',
             'css_id' => (isset($instance['css_id'])) ? $instance['css_id'] : '',
             'post_type' => (isset($instance['post_type'])) ? $instance['post_type'] : 'post',
+            'posts_title_tag' => (isset($instance['posts_title_tag'])) ? $instance['posts_title_tag'] : 'h3',
+            'posts_show_image' => (isset($instance['posts_show_image'])) ? $instance['posts_show_image'] : 'no',
             'posts_to_show' => (isset($instance['posts_to_show'])) ? $instance['posts_to_show'] : 3,
             'order' => (isset($instance['order'])) ? $instance['order'] : 'ASC',
         ];
         $postTypes = get_post_types();
         ?>
+        <p>
+            <label for="<?php echo $this->get_field_id('title_tag'); ?>">
+                <?php echo __('Title tag', 'insomniodev') . ':'; ?>
+            </label>
+            <select class="widefat tags-input"
+                    id="<?php echo $this->get_field_id('title_tag'); ?>"
+                    name="<?php echo $this->get_field_name('title_tag'); ?>">
+                <option value=""><?php _e('Select a option', 'insomniodev'); ?></option>
+                <option value="h1"
+                    <?php echo (strtolower($args['title_tag']) == 'h1') ? 'selected' : ''; ?>>
+                    <?php _e('H1', 'insomniodev'); ?>
+                </option>
+                <option value="h2"
+                    <?php echo (strtolower($args['title_tag']) == 'h2') ? 'selected' : ''; ?>>
+                    <?php _e('H2', 'insomniodev'); ?>
+                </option>
+                <option value="h3"
+                    <?php echo (strtolower($args['title_tag']) == 'h3') ? 'selected' : ''; ?>>
+                    <?php _e('H3', 'insomniodev'); ?>
+                </option>
+                <option value="h4"
+                    <?php echo (strtolower($args['title_tag']) == 'h4') ? 'selected' : ''; ?>>
+                    <?php _e('H4', 'insomniodev'); ?>
+                </option>
+                <option value="h5"
+                    <?php echo (strtolower($args['title_tag']) == 'h5') ? 'selected' : ''; ?>>
+                    <?php _e('H5', 'insomniodev'); ?>
+                </option>
+                <option value="h6"
+                    <?php echo (strtolower($args['title_tag']) == 'h1') ? 'selected' : ''; ?>>
+                    <?php _e('H6', 'insomniodev'); ?>
+                </option>
+            </select>
+        </p>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>">
                 <?php echo __('Title', 'insomniodev') . ':'; ?>
@@ -152,6 +217,58 @@ class IdtWidgetMostPopularPosts extends WP_Widget
                         <?php echo $postType; ?>
                     </option>
                 <?php endforeach; ?>
+            </select>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('posts_title_tag'); ?>">
+                <?php echo __('Posts title tag', 'insomniodev') . ':'; ?>
+            </label>
+            <select class="widefat tags-input"
+                    id="<?php echo $this->get_field_id('posts_title_tag'); ?>"
+                    name="<?php echo $this->get_field_name('posts_title_tag'); ?>">
+                <option value=""><?php _e('Select a option', 'insomniodev'); ?></option>
+                <option value="h1"
+                    <?php echo (strtolower($args['posts_title_tag']) == 'h1') ? 'selected' : ''; ?>>
+                    <?php _e('H1', 'insomniodev'); ?>
+                </option>
+                <option value="h2"
+                    <?php echo (strtolower($args['posts_title_tag']) == 'h2') ? 'selected' : ''; ?>>
+                    <?php _e('H2', 'insomniodev'); ?>
+                </option>
+                <option value="h3"
+                    <?php echo (strtolower($args['posts_title_tag']) == 'h3') ? 'selected' : ''; ?>>
+                    <?php _e('H3', 'insomniodev'); ?>
+                </option>
+                <option value="h4"
+                    <?php echo (strtolower($args['posts_title_tag']) == 'h4') ? 'selected' : ''; ?>>
+                    <?php _e('H4', 'insomniodev'); ?>
+                </option>
+                <option value="h5"
+                    <?php echo (strtolower($args['posts_title_tag']) == 'h5') ? 'selected' : ''; ?>>
+                    <?php _e('H5', 'insomniodev'); ?>
+                </option>
+                <option value="h6"
+                    <?php echo (strtolower($args['posts_title_tag']) == 'h1') ? 'selected' : ''; ?>>
+                    <?php _e('H6', 'insomniodev'); ?>
+                </option>
+            </select>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('posts_show_image'); ?>">
+                <?php echo __('Show posts image', 'insomniodev') . ':'; ?>
+            </label>
+            <select class="widefat tags-input"
+                    id="<?php echo $this->get_field_id('posts_show_image'); ?>"
+                    name="<?php echo $this->get_field_name('posts_show_image'); ?>">
+                <option value=""><?php _e('Select a option', 'insomniodev'); ?></option>
+                <option value="no"
+                    <?php echo (strtolower($args['posts_show_image']) == 'no') ? 'selected' : ''; ?>>
+                    <?php _e('No', 'insomniodev'); ?>
+                </option>
+                <option value="yes"
+                    <?php echo (strtolower($args['posts_show_image']) == 'yes') ? 'selected' : ''; ?>>
+                    <?php _e('Yes', 'insomniodev'); ?>
+                </option>
             </select>
         </p>
         <p>
@@ -218,8 +335,11 @@ class IdtWidgetMostPopularPosts extends WP_Widget
     public function update($new_instance, $old_instance)
     {
         $instance = $old_instance;
+        $instance['title_tag'] = strip_tags($new_instance['title_tag']);
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['post_type'] = strip_tags($new_instance['post_type']);
+        $instance['posts_title_tag'] = strip_tags($new_instance['posts_title_tag']);
+        $instance['posts_show_image'] = strip_tags($new_instance['posts_show_image']);
         $instance['order'] = strip_tags($new_instance['order']);
         $instance['posts_to_show'] = strip_tags($new_instance['posts_to_show']);
         $instance['css_class'] = strip_tags($new_instance['css_class']);

@@ -36,6 +36,10 @@ function idtGetPostList(array $filters = []): array
         $args['posts_per_page'] = $filters['postPerPage'];
     }
 
+    if (isset($filters['offset']) && $filters['offset'] > 0) {
+        $args['offset'] = $filters['offset'];
+    }
+
     if (isset($filters['search']) && $filters['search'] != '') {
         $args['s'] = trim($filters['search']);
     }
@@ -50,7 +54,6 @@ function idtGetPostList(array $filters = []): array
             'terms' => $filters['terms'],
             'include_children' => false // Remove if you need posts from term 7 child terms
         ];
-
     }
 
     if (!empty($filters['metaQuery'])) {
@@ -87,7 +90,9 @@ function idtGetPostList(array $filters = []): array
         $args['order'] = trim($filters['order']);
     }
 
+    add_filter('posts_where', 'idtPostTitleQueryFilter' , 10, 2);
     $loop = new WP_Query($args);
+    remove_filter('posts_where', 'idtPostTitleQueryFilter' , 10, 2);
 
     if ($loop->have_posts()) {
         $items['pagination']['totalPages'] = $loop->max_num_pages;
@@ -101,6 +106,7 @@ function idtGetPostList(array $filters = []): array
                 'title' => get_the_title(),
                 'excerpt' => get_the_excerpt(),
                 'content' => get_the_content(),
+                'permalink' => get_the_permalink(),
                 'customFields' => [],
                 'author' => get_the_author(),
                 'date' => get_the_date(),
@@ -140,4 +146,16 @@ function idtGetPostList(array $filters = []): array
     }
 
     return $items;
+}
+
+function idtPostTitleQueryFilter($sql)
+{
+    global $wpdb;
+    $alphabeticOrder = get_query_var('alphabetic_order');
+
+    if (isset($alphabeticOrder) && $alphabeticOrder != '') {
+        $sql .= $wpdb->prepare(" AND $wpdb->posts.post_title LIKE '" . $alphabeticOrder . "%' ");
+    }
+
+    return $sql;
 }

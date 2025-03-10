@@ -18,3 +18,27 @@ function idtGetHomeUrl(): string
 
     return $url;
 }
+
+/**
+ * Return estimate post reading time
+ * @return string Estimate reading time
+ */
+function idtGetPostReadingTime($postID = null): string
+{
+    $totalReadingTime = '';
+
+    if ($postID) {
+        $content = get_post_field('post_content', $postID);
+        $wordCount = str_word_count(strip_tags($content));
+        $readingTime = ceil($wordCount / 200);
+
+        if ($readingTime == 1) {
+            $timer = __('minute', 'insomniodev');
+        } else {
+            $timer = __('minutes', 'insomniodev');
+        }
+        $totalReadingTime = $readingTime . ' ' . $timer;
+    }
+
+    return $totalReadingTime;
+}

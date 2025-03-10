@@ -79,9 +79,10 @@ function idtSlickCarouselExternalControls(target = '') {
 /**
  * Glide carousel controls init handler
  * @param target string selector the carousels selector
+ * @param callbacks array Glide callbacks array
  * @return void
  */
-function idtGlideCarouselInit(target = '') {
+function idtGlideCarouselInit(target = '', callbacks = []) {
     if(target && target !== '') {
         let carousels = document.querySelectorAll(target);
 
@@ -100,6 +101,16 @@ function idtGlideCarouselInit(target = '') {
             }
 
             const glideCarousels = new Glide(carousel, configs);
+
+            if (callbacks && callbacks.length) {
+                for (const callback of callbacks) {
+                    if (callback.event && callback.event !== '' && callback.callback) {
+                        glideCarousels.on(callback.event, (event) => {
+                            callback.callback(event, glideCarousels, carousel);
+                        });
+                    }
+                }
+            }
 
             glideCarousels.mount();
         }

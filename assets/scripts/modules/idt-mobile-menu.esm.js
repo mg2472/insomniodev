@@ -26,6 +26,10 @@ class idtMobileMenuEsm {
 
             if(menuMobileTriggers) {
                 for(let menuMobileTrigger of menuMobileTriggers) {
+                    for (const item of menuMobileTriggers) {
+                        item.classList.toggle('active');
+                    }
+                    
                     menuMobileTrigger.addEventListener('click', () => {
                         this.toggleHandler(container, menu, menuMobileTriggers);
                     });
