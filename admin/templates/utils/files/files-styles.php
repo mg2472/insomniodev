@@ -31,14 +31,14 @@ $uniqFieldID = uniqid();
             <?php foreach ($configs['files'] as $file): ?>
                 <li>
                     <div class="idt-dashboard__input-group idt-dashboard__input-group--full-width">
-                        <label for="idt-dashboard__input-file-name-<?php echo $count . '-' . $uniqFieldID; ?>"
-                               class="idt-dashboard__label"><?php echo $file; ?></label>
+                        <label for="idt-dashboard__input-file-name-<?php echo esc_attr($count) . '-' . esc_attr($uniqFieldID); ?>"
+                               class="idt-dashboard__label"><?php echo esc_html($file); ?></label>
                         <label class="idt-dashboard__input-switch">
                             <input type="checkbox"
-                                   id="idt-dashboard__input-file-name-<?php echo $count . '-' . $uniqFieldID; ?>"
+                                   id="idt-dashboard__input-file-name-<?php echo esc_attr($count) . '-' . esc_attr($uniqFieldID); ?>"
                                    name="files"
                                    data-value="true"
-                                   value="<?php echo $file; ?>">
+                                   value="<?php echo esc_attr($file); ?>">
                             <span class="idt-dashboard__input-switch-slider idt-dashboard__input-switch-round"></span>
                         </label>
                     </div>

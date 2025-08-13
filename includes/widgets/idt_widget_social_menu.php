@@ -26,9 +26,10 @@ class IdtWidgetSocialMenu extends WP_Widget
         $cssID = (isset($instance['css_id'])
             && $instance['css_id'] != '') ? $instance['css_id'] : '';
         ?>
-        <section class="idt-widget idt-widget-social-menu <?php echo $cssClass; ?>" id="<?php echo $cssID; ?>">
+        <section class="idt-widget idt-widget-social-menu <?php echo esc_attr($cssClass); ?>"
+                 id="<?php echo esc_attr($cssID); ?>">
             <?php if (isset($instance['title']) && $instance['title'] != '' ): ?>
-                <h2 class="idt-widget__title"><?php echo $instance['title']; ?></h2>
+                <h2 class="idt-widget__title"><?php echo esc_html($instance['title']); ?></h2>
             <?php endif; ?>
             <?php get_template_part($templatePart); ?>
         </section>
@@ -51,32 +52,32 @@ class IdtWidgetSocialMenu extends WP_Widget
         ];
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
                 <?php echo __('Title', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('title'); ?>"
-                   name="<?php echo $this->get_field_name('title'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('title')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['title']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('css_class'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('css_class')); ?>">
                 <?php echo __('CSS Class', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('css_class'); ?>"
-                   name="<?php echo $this->get_field_name('css_class'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('css_class')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('css_class')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['css_class']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('css_id'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('css_id')); ?>">
                 <?php echo __('CSS ID', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('css_id'); ?>"
-                   name="<?php echo $this->get_field_name('css_id'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('css_id')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('css_id')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['css_id']); ?>"/>
         </p>

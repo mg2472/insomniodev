@@ -64,7 +64,8 @@ class IdtWidgetMostPopularPosts extends WP_Widget
         $cssID = (isset($instance['css_id'])
             && $instance['css_id'] != '') ? $instance['css_id'] : '';
         ?>
-        <section class="idt-widget idt-widget-mpp <?php echo $cssClass; ?>" id="<?php echo $cssID; ?>">
+        <section class="idt-widget idt-widget-mpp <?php echo esc_attr($cssClass); ?>"
+                 id="<?php echo esc_attr($cssID); ?>">
             <?php if (isset($instance['title']) && $instance['title'] != ''): ?>
                 <?php get_template_part('template-parts/utils/tags/title', 'v1', [
                     'title' => $instance['title'],
@@ -107,7 +108,7 @@ class IdtWidgetMostPopularPosts extends WP_Widget
                         <ul class="idt-widget-mpp__categories">
                             <?php foreach ($categories as $category): ?>
                                 <li itemprop="about">
-                                    <a href="<?php echo get_category_link($category); ?>"><?php echo $category->name; ?></a>
+                                    <a href="<?php echo get_category_link($category); ?>"><?php echo esc_html($category->name); ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -117,7 +118,7 @@ class IdtWidgetMostPopularPosts extends WP_Widget
                                 'tag' => isset($instance['posts_title_tag']) && $instance['posts_title_tag'] != '' ? $instance['posts_title_tag'] : 'h4',
                                 'cssClass' => 'idt-widget-mpp__item-title'
                             ]); ?>
-                            <meta itemprop="headline" content="<?php echo $post->post_title; ?>">
+                            <meta itemprop="headline" content="<?php echo esc_html($post->post_title); ?>">
                         </a>
                         <footer class="idt-widget-mpp__footer">
                             <time class="idt-widget-mpp__date"
@@ -159,12 +160,12 @@ class IdtWidgetMostPopularPosts extends WP_Widget
         $postTypes = get_post_types();
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title_tag'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('title_tag')); ?>">
                 <?php echo __('Title tag', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('title_tag'); ?>"
-                    name="<?php echo $this->get_field_name('title_tag'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('title_tag')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('title_tag')); ?>">
                 <option value=""><?php _e('Select a option', 'insomniodev'); ?></option>
                 <option value="h1"
                     <?php echo (strtolower($args['title_tag']) == 'h1') ? 'selected' : ''; ?>>
@@ -193,39 +194,39 @@ class IdtWidgetMostPopularPosts extends WP_Widget
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
                 <?php echo __('Title', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('title'); ?>"
-                   name="<?php echo $this->get_field_name('title'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('title')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['title']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('post_type'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('post_type')); ?>">
                 <?php echo __('Post Type', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('post_type'); ?>"
-                    name="<?php echo $this->get_field_name('post_type'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('post_type')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('post_type')); ?>">
                 <option value=""><?php _e('Select a post_type', 'insomniodev'); ?></option>
                 <?php foreach ($postTypes as $postType): ?>
-                    <option value="<?php echo $postType;?>"
-                        <?php echo ($postType == $args['post_type']) ? 'selected' : ''; ?>
+                    <option value="<?php echo esc_attr($postType);?>"
+                        <?php echo (esc_attr($postType) == esc_attr($args['post_type'])) ? 'selected' : ''; ?>
                     >
-                        <?php echo $postType; ?>
+                        <?php echo esc_html($postType); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('posts_title_tag'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('posts_title_tag')); ?>">
                 <?php echo __('Posts title tag', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('posts_title_tag'); ?>"
-                    name="<?php echo $this->get_field_name('posts_title_tag'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('posts_title_tag')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('posts_title_tag')); ?>">
                 <option value=""><?php _e('Select a option', 'insomniodev'); ?></option>
                 <option value="h1"
                     <?php echo (strtolower($args['posts_title_tag']) == 'h1') ? 'selected' : ''; ?>>
@@ -254,12 +255,12 @@ class IdtWidgetMostPopularPosts extends WP_Widget
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('posts_show_image'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('posts_show_image')); ?>">
                 <?php echo __('Show posts image', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('posts_show_image'); ?>"
-                    name="<?php echo $this->get_field_name('posts_show_image'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('posts_show_image')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('posts_show_image')); ?>">
                 <option value=""><?php _e('Select a option', 'insomniodev'); ?></option>
                 <option value="no"
                     <?php echo (strtolower($args['posts_show_image']) == 'no') ? 'selected' : ''; ?>>
@@ -272,22 +273,22 @@ class IdtWidgetMostPopularPosts extends WP_Widget
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('posts_to_show'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('posts_to_show')); ?>">
                 <?php echo __('Posts to show', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('posts_to_show'); ?>"
-                   name="<?php echo $this->get_field_name('posts_to_show'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('posts_to_show')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('posts_to_show')); ?>"
                    type="number"
                    value="<?php echo esc_attr($args['posts_to_show']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('order'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('order')); ?>">
                 <?php echo __('Order', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('order'); ?>"
-                    name="<?php echo $this->get_field_name('order'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('order')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('order')); ?>">
                 <option value=""><?php _e('Select a order', 'insomniodev'); ?></option>
                 <option value="ASC"
                     <?php echo (strtolower($args['order']) == 'asc') ? 'selected' : ''; ?>>
@@ -300,22 +301,22 @@ class IdtWidgetMostPopularPosts extends WP_Widget
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('css_class'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('css_class')); ?>">
                 <?php echo __('CSS Class', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('css_class'); ?>"
-                   name="<?php echo $this->get_field_name('css_class'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('css_class')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('css_class')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['css_class']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('css_id'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('css_id')); ?>">
                 <?php echo __('CSS ID', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('css_id'); ?>"
-                   name="<?php echo $this->get_field_name('css_id'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('css_id')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('css_id')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['css_id']); ?>"/>
         </p>

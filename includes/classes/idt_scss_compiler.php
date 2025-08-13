@@ -4,16 +4,16 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
 
 /**
  * Include class dependencies
- * @version 0.0.1
+ * @version 1.0.0
  */
 
-include_once IDT_THEME_PATH . '/assets/libs/php/scssphp-1.11.0/scss.inc.php';
+require IDT_THEME_PATH . '/includes/vendor/autoload.php';
 use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Exception\SassException;
 
 /**
  * Main SCSS compiler class
- * @version 0.0.1
+ * @version 1.0.0
  */
 class IdtScssCompiler
 {
@@ -22,10 +22,17 @@ class IdtScssCompiler
      * @param $args array compiler args
      * @return array compiled css info
      * @throws SassException
-     * @version 0.0.1
+     * @version 1.0.0
      */
     public function compileScss(array $args = []): array
     {
+        global $wp_filesystem;
+
+        if (!function_exists('WP_Filesystem')) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+        }
+
+        WP_Filesystem();
 
         $params = [
             'path' => null,
@@ -72,8 +79,17 @@ class IdtScssCompiler
                     $css = $compiler->compileString('@import "' . $params['importFileName'] . '.scss";');
                 }
                 $result['cssFileName'] = $params['cssFileName'] . '.css';
-                file_put_contents($params['outputPath'] . $params['cssFileName'] . '.css.map', $css->getSourceMap());
-                $result['compileResult'] = file_put_contents($params['outputPath'] . $params['cssFileName'] . '.css', $css->getCss());
+                $wp_filesystem->put_contents(
+                    $params['outputPath'] . $params['cssFileName'] . '.css.map',
+                    $css->getSourceMap(),
+                    FS_CHMOD_FILE
+                );
+
+                $result['compileResult'] = $wp_filesystem->put_contents(
+                    $params['outputPath'] . $params['cssFileName'] . '.css',
+                    $css->getCss(),
+                    FS_CHMOD_FILE
+                );
             } catch (Exception $e) {
                 $result['errors'] = $e->getMessage();
             }

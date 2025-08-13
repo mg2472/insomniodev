@@ -8,6 +8,16 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
  */
 class IdtResources
 {
+    private string $resourcesVersion = '1.0.0';
+
+    function __construct() {
+        $resourcesVersion = get_option('idt_resources_version');
+
+        if ($resourcesVersion) {
+            $this->resourcesVersion = '1.0.' . $resourcesVersion;
+        }
+    }
+
     /**
      * Add the theme resources
      * @param string $template Current template
@@ -72,10 +82,10 @@ class IdtResources
      */
     public function addThemeScripts(array $settings = []): void
     {
-        wp_register_script('idtThemeHeaderHook', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-header-hook.js', false, '1.0.0', false);
+        wp_register_script('idtThemeHeaderHook', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-header-hook.js', false, $this->resourcesVersion, false);
         wp_enqueue_script('idtThemeHeaderHook');
 
-        wp_register_script('idtThemeResources', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-resources.esm.js', false, '1.0.0', true);
+        wp_register_script('idtThemeResources', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-resources.esm.js', false, $this->resourcesVersion, true);
         wp_enqueue_script('idtThemeResources');
 
         if (!empty($settings)) {
@@ -88,7 +98,7 @@ class IdtResources
 
                 foreach ($headerScripts as $item) {
                     $x++;
-                    wp_register_script('idtHeaderScript-' . $x, $item, [], '1.0.0', false);
+                    wp_register_script('idtHeaderScript-' . $x, $item, [], $this->resourcesVersion, false);
                     wp_enqueue_script('idtHeaderScript-' . $x);
                 }
             }
@@ -99,7 +109,7 @@ class IdtResources
 
                 foreach ($footerScripts as $item) {
                     $x++;
-                    wp_register_script('idtFooterScript-' . $x, $item, [], '1.0.0', true);
+                    wp_register_script('idtFooterScript-' . $x, $item, [], $this->resourcesVersion, true);
                     wp_enqueue_script('idtFooterScript-' . $x);
                 }
             }
@@ -134,7 +144,7 @@ class IdtResources
 
                 foreach ($criticalCss as $item) {
                     $x++;
-                    wp_register_style('idtCriticalCss-' . $x, $item, [], '1.0.0', false);
+                    wp_register_style('idtCriticalCss-' . $x, $item, [], $this->resourcesVersion, false);
                     wp_enqueue_style('idtCriticalCss-' . $x);
                 }
             }
@@ -164,25 +174,25 @@ class IdtResources
      */
     public function addDefaultThemeStyles(): void
     {
-        wp_register_style('idtGlideCore', IDT_THEME_DIR . '/assets/libs/glide/css/glide.core.min.css', false);
+        wp_register_style('idtGlideCore', IDT_THEME_DIR . '/assets/libs/glide/css/glide.core.min.css', false, $this->resourcesVersion);
         wp_enqueue_style('idtGlideCore');
 
-        wp_register_style('idtGlideTheme', IDT_THEME_DIR . '/assets/libs/glide/css/glide.theme.min.css', false);
+        wp_register_style('idtGlideTheme', IDT_THEME_DIR . '/assets/libs/glide/css/glide.theme.min.css', false, $this->resourcesVersion);
         wp_enqueue_style('idtGlideTheme');
 
-        wp_register_style('idtLiteYoutubeEmbed', IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.css', false);
+        wp_register_style('idtLiteYoutubeEmbed', IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.css', false, $this->resourcesVersion);
         wp_enqueue_style('idtLiteYoutubeEmbed');
 
-        wp_register_style('idtBootstrapStyles', IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/css/bootstrap.min.css', false);
+        wp_register_style('idtBootstrapStyles', IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/css/bootstrap.min.css', false, $this->resourcesVersion);
         wp_enqueue_style('idtBootstrapStyles');
 
-        wp_register_style('idtThemeStyles', IDT_THEME_DIR . '/assets/styles/css/master.css', ['idtBootstrapStyles'], '1.0.0');
+        wp_register_style('idtThemeStyles', IDT_THEME_DIR . '/assets/styles/css/master.css', ['idtBootstrapStyles'], $this->resourcesVersion);
         wp_enqueue_style('idtThemeStyles');
 
         if (defined('IDT_CHILD_THEME_DIR')) {
             $childThemeDir = IDT_CHILD_THEME_DIR;
 
-            wp_register_style( 'idtChildThemeStyles', $childThemeDir . '/assets/styles/css/child-master.css', ['idtThemeStyles'], '1.0.0');
+            wp_register_style( 'idtChildThemeStyles', $childThemeDir . '/assets/styles/css/child-master.css', ['idtThemeStyles'], $this->resourcesVersion);
             wp_enqueue_style( 'idtChildThemeStyles' );
         }
     }
@@ -194,28 +204,28 @@ class IdtResources
      */
     public function addDefaultThemeScripts(): void
     {
-        wp_register_script('idtThemeHeaderHook', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-header-hook.js', false, '1.0.0', false);
+        wp_register_script('idtThemeHeaderHook', IDT_THEME_DIR . '/assets/scripts/theme/idt-theme-header-hook.js', false, $this->resourcesVersion, false);
         wp_enqueue_script('idtThemeHeaderHook');
 
-        wp_register_script('idtBootstrapJS' , IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/js/bootstrap.bundle.min.js', [], '1.0.0', true);
+        wp_register_script('idtBootstrapJS' , IDT_THEME_DIR . '/assets/libs/bootstrap/versions/version-5.2/js/bootstrap.bundle.min.js', [], $this->resourcesVersion, true);
         wp_enqueue_script('idtBootstrapJS');
 
-        wp_register_script('idtLiteYoutubeEmbed' , IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.js', '', null, true);
+        wp_register_script('idtLiteYoutubeEmbed' , IDT_THEME_DIR . '/assets/libs/lite-youtube-embed/lite-yt-embed.js', '', $this->resourcesVersion, true);
         wp_enqueue_script('idtLiteYoutubeEmbed');
 
-        wp_register_script('idtDefaultHeaderScripts', IDT_THEME_DIR . '/assets/scripts/header-scripts.js', [], null, false);
+        wp_register_script('idtDefaultHeaderScripts', IDT_THEME_DIR . '/assets/scripts/header-scripts.js', [], $this->resourcesVersion, false);
         wp_enqueue_script('idtDefaultHeaderScripts');
 
-        wp_register_script('idtDefaultFooterScripts', IDT_THEME_DIR . '/assets/scripts/footer-scripts.js', ['idtBootstrapJS', 'idtLiteYoutubeEmbed'], null, true);
+        wp_register_script('idtDefaultFooterScripts', IDT_THEME_DIR . '/assets/scripts/footer-scripts.js', ['idtBootstrapJS', 'idtLiteYoutubeEmbed'], $this->resourcesVersion, true);
         wp_enqueue_script('idtDefaultFooterScripts');
 
         if (defined('IDT_CHILD_THEME_PATH')) {
             $childThemeDir = IDT_CHILD_THEME_DIR;
 
-            wp_register_script('idtDefaultChildThemeHeaderScripts', $childThemeDir . '/assets/scripts/header-scripts.js', ['idtDefaultHeaderScripts'], null, false);
+            wp_register_script('idtDefaultChildThemeHeaderScripts', $childThemeDir . '/assets/scripts/header-scripts.js', ['idtDefaultHeaderScripts'], $this->resourcesVersion, false);
             wp_enqueue_script('idtDefaultChildThemeHeaderScripts');
 
-            wp_register_script('idtDefaultChildThemeFooterScripts', $childThemeDir . '/assets/scripts/footer-scripts.js', ['idtDefaultFooterScripts'], null, true);
+            wp_register_script('idtDefaultChildThemeFooterScripts', $childThemeDir . '/assets/scripts/footer-scripts.js', ['idtDefaultFooterScripts'], $this->resourcesVersion, true);
             wp_enqueue_script('idtDefaultChildThemeFooterScripts');
         }
     }
