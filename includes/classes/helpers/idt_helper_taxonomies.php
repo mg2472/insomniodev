@@ -44,6 +44,10 @@ function idtGetPostList(array $filters = []): array
         $args['s'] = trim($filters['search']);
     }
 
+    if (isset($filters['title']) && $filters['title'] != '') {
+        $args['title'] = trim($filters['title']);
+    }
+
     if (!empty($filters['ids'])) {
         $args['post__in'] = $filters['ids'];
     }
@@ -90,9 +94,17 @@ function idtGetPostList(array $filters = []): array
         $args['order'] = trim($filters['order']);
     }
 
+    if (isset($filters['search']) && $filters['search'] != '' && isset($filters['searchTitleOnly']) && $filters['searchTitleOnly']) {
+        add_filter('posts_search', 'idtSearchTitleOnly', 10, 2);
+    }
+
     add_filter('posts_where', 'idtPostTitleQueryFilter' , 10, 2);
     $loop = new WP_Query($args);
     remove_filter('posts_where', 'idtPostTitleQueryFilter' , 10, 2);
+
+    if (isset($filters['search']) && $filters['search'] != '' && isset($filters['searchTitleOnly']) && $filters['searchTitleOnly']) {
+        remove_filter('posts_search', 'idtSearchTitleOnly', 10, 2);
+    }
 
     if ($loop->have_posts()) {
         $items['pagination']['totalPages'] = $loop->max_num_pages;
@@ -148,6 +160,41 @@ function idtGetPostList(array $filters = []): array
     return $items;
 }
 
+/**
+ * Posts title only filter
+ *
+ * @param $search string DB The query
+ *
+ * @param $wp_query WP_Query The WP_Query
+ *
+ * @return string New Posts query
+ */
+function idtSearchTitleOnly($search, \WP_Query $wp_query)
+{
+    global $wpdb;
+    if (!empty($wp_query->query_vars['s'])) {
+        $search = '';
+        $searchTerms = $wp_query->query_vars['s'];
+        $searchTerms = array_map('trim', explode(' ', $searchTerms));
+        $search = " AND (";
+        $searchArr = [];
+        foreach ($searchTerms as $term) {
+            $like = '%' . $wpdb->esc_like($term) . '%';
+            $searchArr[] = $wpdb->prepare("{$wpdb->posts}.post_title LIKE %s", $like);
+        }
+        $search .= implode(' AND ', $searchArr);
+        $search .= ")";
+    }
+    return $search;
+}
+
+/**
+ * Title alphabetic order filter
+ *
+ * @param $sql string The database query
+ *
+ * @return string New Posts query
+ */
 function idtPostTitleQueryFilter($sql)
 {
     global $wpdb;

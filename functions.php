@@ -230,6 +230,26 @@ function idtDisableWidgetsBlockEditor(): bool
 }
 
 /**
+ * Add theme post support
+ */
+add_action('init' , 'idtAddThemeSupport');
+function idtAddThemeSupport(): void
+{
+    add_theme_support('title-tag');
+    add_theme_support('custom-logo');
+    add_theme_support('post-thumbnails');
+    add_theme_support('automatic-feed-links');
+    add_theme_support('responsive-embeds');
+    add_theme_support('wp-block-styles');
+    add_theme_support('html5', [
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+    ]);
+}
+
+/**
  * Add custom mime types upload support
  */
 add_filter('upload_mimes', 'idtMimeTypes');

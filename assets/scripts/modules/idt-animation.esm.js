@@ -41,4 +41,44 @@ function idtAnimationController(target) {
     }
 }
 
-export {idtAnimationController}
+/**
+ * Init am element counter animation
+ *
+ * @param element htmlNode The message to show
+ *
+ * @param startValue int element start value
+ *
+ * @param endValue int element end value
+ *
+ * @param duration int the animation duration in milliseconds
+ *
+ * @return void
+ */
+function idtAnimateCounter(element, startValue = 0, endValue = 0, duration = 1000) {
+    const range = endValue - startValue;
+    const startTime = performance.now();
+    const endValueDecimals = numberDecimals(endValue);
+
+    function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = progress * range + startValue;
+
+        element.textContent = value.toFixed(endValueDecimals);
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    function numberDecimals(number) {
+        if (Math.floor(number) === number) return 0;
+        const str = number.toString();
+        const parts = str.split(".");
+        return parts[1]?.length || 0;
+    }
+
+    requestAnimationFrame(step);
+}
+
+export {idtAnimationController, idtAnimateCounter}

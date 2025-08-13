@@ -36,9 +36,9 @@ if (isset($settings['cssClass']) && $settings['cssClass'] != '') {
 }
 ?>
 <?php if ($settings['url'] != ''): ?>
-    <div class="<?php echo $cssClass; ?>" id="<?php echo $id; ?>">
-        <iframe src="<?php echo $settings['url']; ?>"
-                loading="<?php echo $settings['loading']; ?>"
+    <div class="<?php echo esc_attr($cssClass); ?>" id="<?php echo esc_attr($id); ?>">
+        <iframe src="<?php echo esc_url($settings['url']); ?>"
+                loading="<?php echo esc_attr($settings['loading']); ?>"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>

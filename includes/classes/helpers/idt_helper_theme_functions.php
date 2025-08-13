@@ -101,6 +101,10 @@ function idtTFAddThemeResources(): void
         $idtResources = new IdtResources();
         $idtResources->addThemeResources($template);
     }
+
+    if (is_singular() && comments_open() && (get_option('thread_comments') == 1)) {
+        wp_enqueue_script('comment-reply');
+    }
 }
 
 /**

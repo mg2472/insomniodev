@@ -17,10 +17,13 @@ $settings = [
     'title' => null,
     'videoID' => null,
     'url' => null,
+    'previewImage' => null,
     'startAt' => null,
     'autoload' => null,
     'short' => null,
     'params' => null,
+    'loop' => null,
+    'mute' => null,
     'cssClass' => null,
     'id' => null
 ];
@@ -33,6 +36,7 @@ $id = uniqid('idt-sc-video-v1-youtube');
 $cssClass = 'idt-sc-video-v1-youtube';
 $videoID = '';
 $videoAttributes = '';
+$previewImage = '';
 
 if (isset($settings['videoID']) && $settings['videoID'] != '') {
     $videoID = $settings['videoID'];
@@ -56,8 +60,22 @@ if (isset($settings['videoID']) && $settings['videoID'] != '') {
     }
 }
 
-if (isset($settings['params']) && $settings['params'] != '') {
-    $videoAttributes .= ' params="' . $settings['params'] . '"';
+if (isset($settings['loop']) && $settings['loop'] == 1) {
+    $params[] = 'loop=1';
+    $params[] = 'playlist=' . $videoID;
+}
+
+if (isset($settings['mute']) && $settings['mute'] == 1) {
+    $params[] = 'mute=1';
+}
+
+if (!empty($params)) {
+    $params[] = 'enablejsapi=1';
+    $videoAttributes .= ' params="' . implode('&', $params) . '"';
+}
+
+if (isset($settings['previewImage']) && $settings['previewImage'] != '') {
+    $previewImage = $settings['previewImage'];
 }
 
 if (isset($settings['id']) && $settings['id'] != '') {
@@ -70,14 +88,15 @@ if (isset($settings['cssClass']) && $settings['cssClass'] != '') {
 
 ?>
 <?php if ($videoID != ''): ?>
-    <div class="<?php echo $cssClass; ?>" id="<?php echo $id; ?>">
+    <div class="<?php echo esc_attr($cssClass); ?>" id="<?php echo esc_attr($id); ?>">
         <lite-youtube
             class="idt-sc-video-v1-youtube__video-iframe"
-            videoid="<?php echo $videoID; ?>"
-            <?php echo $videoAttributes; ?>>
+            videoid="<?php echo esc_attr($videoID); ?>"
+            <?php echo esc_attr($videoAttributes); ?>
+            <?php echo esc_attr($previewImage) != '' ? 'style="background-image: url(' . esc_attr($previewImage) . ')"' : ''; ?>>
             <button type="button"
                     class="lty-playbtn">
-                <span class="lyt-visually-hidden"><?php echo $settings['title']; ?></span>
+                <span class="lyt-visually-hidden"><?php echo esc_html($settings['title']); ?></span>
             </button>
         </lite-youtube>
     </div>

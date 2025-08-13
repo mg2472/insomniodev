@@ -39,7 +39,7 @@ get_header();
                                         <li><?php _e( 'Categories', 'insomniodev' );?>:</li>
 			                            <?php foreach ( $categories as $category ) :?>
 				                            <?php $category = get_category( $category );?>
-                                            <li itemprop="category"><a href="<?php echo get_category_link( $category );?>"><?php echo $category->name;?></a></li>
+                                            <li itemprop="category"><a href="<?php echo get_category_link( $category );?>"><?php echo esc_html($category->name); ?></a></li>
 			                            <?php endforeach; ?>
                                     </ul>
 	                            <?php endif;?>

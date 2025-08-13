@@ -8,6 +8,11 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
  */
 class IdtSettings
 {
+    private $resourcesVersion = false;
+
+    function __construct() {
+        $this->resourcesVersion = get_option('idt_resources_version');
+    }
 
     /**
      * Return the theme social settings
@@ -465,7 +470,13 @@ class IdtSettings
         $queryResults = [];
         $flag = false;
 
-        if(isset($values) && !empty($values)) {
+        if ($this->resourcesVersion) {
+            $this->resourcesVersion++;
+        } else {
+            $this->resourcesVersion = 1;
+        }
+
+        if (isset($values) && !empty($values)) {
             global $wpdb;
             include_once IDT_THEME_PATH . '/includes/classes/idt_scss_compiler.php';
             $scssCompiler = new IdtScssCompiler();
@@ -506,9 +517,11 @@ class IdtSettings
             }
         }
 
-        return $flag;
+        if ($flag) {
+            update_option('idt_resources_version', $this->resourcesVersion);
+        }
 
-//        return $queryResults;
+        return $flag;
     }
 
     /**
@@ -522,7 +535,13 @@ class IdtSettings
         $queryResults = [];
         $flag = false;
 
-        if(isset($values) && !empty($values) && isset($values['id'])) {
+        if ($this->resourcesVersion) {
+            $this->resourcesVersion++;
+        } else {
+            $this->resourcesVersion = 1;
+        }
+
+        if (isset($values) && !empty($values) && isset($values['id'])) {
             global $wpdb;
             include_once IDT_THEME_PATH . '/includes/classes/idt_scss_compiler.php';
             $scssCompiler = new IdtScssCompiler();
@@ -561,9 +580,11 @@ class IdtSettings
             }
         }
 
-        return $flag;
+        if ($flag) {
+            update_option('idt_resources_version', $this->resourcesVersion);
+        }
 
-//        return $queryResults;
+        return $flag;
     }
 
     /**

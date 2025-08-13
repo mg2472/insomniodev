@@ -75,7 +75,7 @@ class IdtShortcodes
     }
 
     /**
-     * This shortcode add video facade
+     * This shortcode adds video facade
      * @param array $atts Shortcode params
      * @version 1.0.0
      */
@@ -87,6 +87,10 @@ class IdtShortcodes
                 'url' => null,
                 'title' => null,
                 'video_id' => null,
+                'preview_image' => null,
+                'params' => null,
+                'loop' => null,
+                'mute' => null,
                 'loading' => null
             ],
             $atts
@@ -100,12 +104,17 @@ class IdtShortcodes
                 $args['title'] = $params['title'];
                 $args['url'] = $params['url'];
                 $args['videoID'] = $params['video_id'];
+                $args['previewImage'] = $params['preview_image'];
+                $args['loop'] = $params['loop'];
+                $args['mute'] = $params['mute'];
                 break;
             case 'iframe':
             default:
                 $templatePart = 'iframe';
                 $args['url'] = $params['url'];
                 $args['loading'] = $params['loading'];
+                $args['loop'] = $params['loop'];
+                $args['mute'] = $params['mute'];
                 break;
         }
 

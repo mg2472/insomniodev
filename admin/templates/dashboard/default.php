@@ -2,6 +2,8 @@
 
 if (!defined('ABSPATH')) exit; //Exit if accessed directly.
 
+$theme = wp_get_theme('insomniodev');
+
 ?>
 <div class="idt-dashboard">
     <div class="idt-dashboard__main">
@@ -57,8 +59,11 @@ if (!defined('ABSPATH')) exit; //Exit if accessed directly.
             <li class="idt-dashboard__menu-item">
                 <a class="idt-dashboard__menu-button" href="<?php echo get_admin_url(); ?>">
                     <span class="dashicons dashicons-wordpress"></span>
-                    <?php _e('Return to wordpress', 'insomniodev-child'); ?>
+                    <?php _e('Return to wordpress', 'insomniodev'); ?>
                 </a>
+            </li>
+            <li class="idt-dashboard__menu-item">
+                <span class="idt-dashboard__sidebar-version"><?php echo __('Ver', 'insomniodev') . ': ' . $theme->get('Version'); ?></span>
             </li>
         </ul>
     </div>

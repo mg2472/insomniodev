@@ -13,7 +13,7 @@ $placeholder = IDT_THEME_DIR . '/admin/assets/images/placeholder-4x4.webp';
             <div class="idt-image-manager">
                 <div class="idt-image-manager__preview">
                     <img class="idt-image-manager__preview-image"
-                         src="<?php echo $placeholder; ?>"
+                         src="<?php echo esc_url($placeholder); ?>"
                          alt="<?php echo __('Image', 'insomniodev') . ' 1'; ?>">
                 </div>
                 <button type="button"
@@ -33,7 +33,7 @@ $placeholder = IDT_THEME_DIR . '/admin/assets/images/placeholder-4x4.webp';
             <div class="idt-image-manager">
                 <div class="idt-image-manager__preview">
                     <img class="idt-image-manager__preview-image"
-                         src="<?php echo $placeholder; ?>"
+                         src="<?php echo esc_url($placeholder); ?>"
                          alt="<?php echo __('Image', 'insomniodev') . ' 2'; ?>">
                 </div>
                 <button type="button"
@@ -53,7 +53,7 @@ $placeholder = IDT_THEME_DIR . '/admin/assets/images/placeholder-4x4.webp';
             <div class="idt-image-manager">
                 <div class="idt-image-manager__preview">
                     <img class="idt-image-manager__preview-image"
-                         src="<?php echo $placeholder; ?>"
+                         src="<?php echo esc_url($placeholder); ?>"
                          alt="<?php echo __('Image', 'insomniodev') . ' 3'; ?>">
                 </div>
                 <button type="button"
@@ -73,7 +73,7 @@ $placeholder = IDT_THEME_DIR . '/admin/assets/images/placeholder-4x4.webp';
             <div class="idt-image-manager">
                 <div class="idt-image-manager__preview">
                     <img class="idt-image-manager__preview-image"
-                         src="<?php echo $placeholder; ?>"
+                         src="<?php echo esc_url($placeholder); ?>"
                          alt="<?php echo __('Image', 'insomniodev') . ' 4'; ?>">
                 </div>
                 <button type="button"

@@ -98,8 +98,6 @@ class IdtAdminFetchHandler
                             $code = 200;
                             break;
                         case 'createTemplateSetting':
-//                            $data = $settings->createTemplateSettings($args);
-//                            $response['message'] = $data;
                             if ($settings->createTemplateSettings($args)) {
                                 $response['message'] = __('Changes saved successfully', 'insomniodev');
                             } else {
@@ -108,8 +106,6 @@ class IdtAdminFetchHandler
                             $code = 200;
                             break;
                         case 'updateTemplateSetting':
-//                            $data = $settings->updateTemplateSettings($args);
-//                            $response['message'] = $data;
                             if ($settings->updateTemplateSettings($args)) {
                                 $response['message'] = __('Changes saved successfully', 'insomniodev');
                             } else {

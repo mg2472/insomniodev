@@ -55,15 +55,16 @@ class IdtWidgetCptCategories extends WP_Widget
         $cssID = (isset($instance['css_id'])
             && $instance['css_id'] != '') ? $instance['css_id'] : '';
         ?>
-        <section class="idt-widget <?php echo $cssClass; ?>" id="<?php echo $cssID; ?>">
+        <section class="idt-widget <?php echo esc_attr($cssClass); ?>"
+                 id="<?php echo esc_attr($cssID); ?>">
             <?php if (isset($instance['title']) && $instance['title'] != '' ): ?>
-                <h2 class="idt-widget__title"><?php echo $instance['title']; ?></h2>
+                <h2 class="idt-widget__title"><?php echo esc_html($instance['title']); ?></h2>
             <?php endif; ?>
             <ul>
                 <?php foreach ($categories as $category): ?>
-                    <li class="cat-item cat-item-<?php echo $category->term_id;?>">
-                        <a href="<?= get_term_link($category->term_id); ?>">
-                            <?php echo $category->name; ?>
+                    <li class="cat-item cat-item-<?php echo esc_attr($category->term_id); ?>">
+                        <a href="<?php get_term_link($category->term_id); ?>">
+                            <?php echo esc_html($category->name); ?>
                         </a>
                     </li>
                 <?php endforeach; ?>
@@ -92,39 +93,39 @@ class IdtWidgetCptCategories extends WP_Widget
         $taxonomies = get_taxonomies();
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
                 <?php echo __('Title', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('title'); ?>"
-                   name="<?php echo $this->get_field_name('title'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('title')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['title']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('taxonomy'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('taxonomy')); ?>">
                 <?php echo __('Taxonomy', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('taxonomy'); ?>"
-                    name="<?php echo $this->get_field_name('taxonomy'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('taxonomy')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('taxonomy')); ?>">
                 <option value=""><?php _e('Select a taxonomy', 'insomniodev'); ?></option>
                 <?php foreach ($taxonomies as $taxonomy): ?>
-                    <option value="<?php echo $taxonomy;?>"
-                        <?php echo ($taxonomy == $args['taxonomy']) ? 'selected' : ''; ?>
+                    <option value="<?php echo esc_attr($taxonomy); ?>"
+                        <?php echo (esc_attr($taxonomy) == esc_attr($args['taxonomy'])) ? 'selected' : ''; ?>
                     >
-                        <?php echo $taxonomy; ?>
+                        <?php echo esc_attr($taxonomy); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('order_by'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('order_by')); ?>">
                 <?php echo __('Order by', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('order_by'); ?>"
-                    name="<?php echo $this->get_field_name('order_by'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('order_by')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('order_by')); ?>">
                 <option value=""><?php _e('Select a order by', 'insomniodev'); ?></option>
                 <option value="name"
                     <?php echo (strtolower($args['order_by']) == 'name') ? 'selected' : ''; ?>>
@@ -145,12 +146,12 @@ class IdtWidgetCptCategories extends WP_Widget
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('order'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('order')); ?>">
                 <?php echo __('Order', 'insomniodev') . ':'; ?>
             </label>
             <select class="widefat tags-input"
-                    id="<?php echo $this->get_field_id('order'); ?>"
-                    name="<?php echo $this->get_field_name('order'); ?>">
+                    id="<?php echo esc_attr($this->get_field_id('order')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('order')); ?>">
                 <option value=""><?php _e('Select a order', 'insomniodev'); ?></option>
                 <option value="ASC"
                     <?php echo (strtolower($args['order']) == 'asc') ? 'selected' : ''; ?>>
@@ -163,22 +164,22 @@ class IdtWidgetCptCategories extends WP_Widget
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('css_class'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('css_class')); ?>">
                 <?php echo __('CSS Class', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('css_class'); ?>"
-                   name="<?php echo $this->get_field_name('css_class'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('css_class')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('css_class')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['css_class']); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('css_id'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('css_id')); ?>">
                 <?php echo __('CSS ID', 'insomniodev') . ':'; ?>
             </label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('css_id'); ?>"
-                   name="<?php echo $this->get_field_name('css_id'); ?>"
+                   id="<?php echo esc_attr($this->get_field_id('css_id')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('css_id')); ?>"
                    type="text"
                    value="<?php echo esc_attr($args['css_id']); ?>"/>
         </p>

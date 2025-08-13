@@ -26,9 +26,9 @@ $logo = idtGetThemeLogo('logo1');
 <?php if (!empty($logo)): ?>
     <a href="<?php echo idtGetHomeUrl(); ?>" class="idt-logo-url">
         <img class="idt-logo"
-             src="<?php echo $logo['url']; ?>"
-             alt="<?php echo $logo['alt']; ?>"
-             width="<?php echo $logo['width']; ?>"
-             height="<?php echo $logo['width']; ?>">
+             src="<?php echo esc_url($logo['url']); ?>"
+             alt="<?php echo esc_attr($logo['alt']); ?>"
+             width="<?php echo esc_attr($logo['width']); ?>"
+             height="<?php echo esc_attr($logo['width']); ?>">
     </a>
 <?php endif; ?>

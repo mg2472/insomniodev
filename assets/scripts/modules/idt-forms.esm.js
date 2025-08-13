@@ -109,16 +109,9 @@ function idtFormValidation(form, callback = null) {
  * Validate a form step
  * @param form object the form to validate.
  * @param callback function an optional callback that will be trigger after the validation.
- * @param beforeNextStepCallback function Callback called before next step
- * @param afterNextStepCallback function Callback called after next step
  * @return bool true if the form inputs not have errors, else return false.
  */
-function idtFormStepsValidation(
-    form,
-    callback = null,
-    beforeNextStepCallback = null,
-    afterNextStepCallback = null
-) {
+function idtFormStepsValidation(form, callback = null) {
     if(form) {
         const steps = form.querySelectorAll('.idt-form__step');
         const stepsIndicators = form.querySelectorAll('.idt-form__steps-indicators .idt-form__steps-indicator');
@@ -178,7 +171,7 @@ function idtFormStepsValidation(
                                     loader.remove();
                                 }
 
-                                idtFormNextStep(steps, toStep, stepsIndicators, beforeNextStepCallback, afterNextStepCallback);
+                                idtFormNextStep(steps, toStep, stepsIndicators);
                             }
                         }else {
                             stepSubmit.disabled = false;
@@ -199,17 +192,9 @@ function idtFormStepsValidation(
  * @param steps HTMLNodes The steps containers
  * @param toStep int The next form step to show
  * @param stepsIndicators HTMLNodes The form steps indicators if existed.
- * @param beforeNextStepCallback function Callback called before next step
- * @param afterNextStepCallback function Callback called after next step
  * @return void
  */
-function idtFormNextStep(
-    steps = null,
-    toStep  = null,
-    stepsIndicators = null,
-    beforeNextStepCallback = null,
-    afterNextStepCallback = null,
-) {
+function idtFormNextStep(steps = null, toStep  = null, stepsIndicators = null) {
     if(steps && toStep) {
         const nextStep = steps[0].closest('form').querySelector(`[data-step="${toStep}"]`);
 
@@ -224,10 +209,6 @@ function idtFormNextStep(
                 const nextIndicator = parseInt(toStep);
                 let stepIndicatorCount = 0;
 
-                if (beforeNextStepCallback) {
-                    beforeNextStepCallback(steps, toStep, stepsIndicators);
-                }
-
                 for(let indicator of stepsIndicators) {
                     stepIndicatorCount++;
                     if(stepIndicatorCount <= nextIndicator) {
@@ -235,10 +216,6 @@ function idtFormNextStep(
                     }else {
                         indicator.classList.remove('active');
                     }
-                }
-
-                if (afterNextStepCallback) {
-                    afterNextStepCallback(steps, toStep, stepsIndicators);
                 }
             }
         }
@@ -440,7 +417,7 @@ function idtGetValidationExpressions(target = '') {
 
     switch(target) {
         case 'email':
-            validationExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            validationExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             break;
         case 'emailNamespace':
             validationExp = /^\w+([\.-]?\w+)*@/;
@@ -472,7 +449,7 @@ function idtValidateRequired(input) {
 
     switch(target) {
         case 'email':
-            validationExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            validationExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             break;
         case 'text':
             validationExp = /^[a-zA-Z \u00C0-\u00FF]*$/;

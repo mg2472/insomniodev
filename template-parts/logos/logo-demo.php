@@ -17,7 +17,7 @@ $logo = IDT_THEME_DIR . '/assets/images/logo-insomniodev.webp';
 ?>
 <a href="<?php echo idtGetHomeUrl(); ?>" class="idt-logo-url">
     <img class="idt-logo"
-         src="<?php echo $logo; ?>"
+         src="<?php echo esc_url($logo); ?>"
          alt="Insomnio Dev Logo"
          width=""
          height="">
